@@ -1,0 +1,17 @@
+# Create models
+
+# User models
+    Role and Permission
+
+# Post
+    - Belongs to user relationship
+
+# Tag
+    - Polymorphic relationship with Post(MorphToMany)
+
+# Comment
+    - Polymorphic relationship with Post(MorphToMany)
+
+# Setting
+
+# Plan
