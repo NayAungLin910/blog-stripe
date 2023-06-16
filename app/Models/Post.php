@@ -6,10 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Casts\TitleClass;
 use Illuminate\Support\Str;
+use App\Traits\HasAuthor;
 
 class Post extends Model
 {
     use HasFactory;
+    use HasAuthor;
 
     const TABLE = "posts";
 
@@ -24,10 +26,13 @@ class Post extends Model
         'type',
         'photo_credit_text',
         'photo_credit_link',
+        'author_id',
     ];
 
     // eager load the relationships
-    protected $with = [];
+    protected $with = [
+        'authorRelation'
+    ];
 
     protected $casts = [
         'published_at' => 'datetime',

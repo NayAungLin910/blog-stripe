@@ -23,6 +23,7 @@ class CreatePostsTable extends Migration
             $table->enum('type', ['standard', 'premium'])->default('standard');
             $table->string('photo_credit_text')->nullable();
             $table->string('photo_credit_link')->nullable();
+            $table->foreignId('author_id')->nullable()->constrained('users')->onDelete('set null');
             $table->timestamps();
         });
     }
