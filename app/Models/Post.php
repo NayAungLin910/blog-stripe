@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use App\Casts\TitleClass;
 use Illuminate\Support\Str;
 use App\Traits\HasAuthor;
+use App\Traits\HasTags;
 
 class Post extends Model
 {
     use HasFactory;
     use HasAuthor;
+    use HasTags;
 
     const TABLE = "posts";
 
@@ -62,5 +64,11 @@ class Post extends Model
     public function coverImage(): string
     {
         return $this->cover_image;
+    }
+
+    public function delete()
+    {
+        $this->removeTags();
+        parent::delete();
     }
 }
