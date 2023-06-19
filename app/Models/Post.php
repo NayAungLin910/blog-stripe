@@ -5,11 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Casts\TitleClass;
+use App\Contracts\CommentAble;
 use Illuminate\Support\Str;
 use App\Traits\HasAuthor;
 use App\Traits\HasTags;
 
-class Post extends Model
+class Post extends Model implements CommentAble
 {
     use HasFactory;
     use HasAuthor;
