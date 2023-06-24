@@ -8,6 +8,7 @@ use App\Casts\TitleClass;
 use App\Contracts\CommentAble;
 use Illuminate\Support\Str;
 use App\Traits\HasAuthor;
+use App\Traits\HasComments;
 use App\Traits\HasTags;
 
 class Post extends Model implements CommentAble
@@ -15,6 +16,7 @@ class Post extends Model implements CommentAble
     use HasFactory;
     use HasAuthor;
     use HasTags;
+    use HasComments;
 
     const TABLE = "posts";
 
@@ -34,7 +36,9 @@ class Post extends Model implements CommentAble
 
     // eager load the relationships
     protected $with = [
-        'authorRelation'
+        'authorRelation',
+        'commentsRelation',
+        'tagsRelation',
     ];
 
     protected $casts = [
@@ -71,5 +75,10 @@ class Post extends Model implements CommentAble
     {
         $this->removeTags();
         parent::delete();
+    }
+
+    public function commentAbleTitle(): string
+    {
+        return $this->title();
     }
 }

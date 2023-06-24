@@ -8,7 +8,7 @@ interface CommentAble
 {
     public function title();
 
-    public function comment();
+    public function comments();
 
     public function latestComments(int $amount = 5);
 

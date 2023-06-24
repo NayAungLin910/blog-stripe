@@ -27,6 +27,7 @@ class User extends Authenticatable
     const MODERATOR = 2;
     const WRITER = 3;
     const ADMIN = 4;
+    const SUPERADMIN = 5;
 
     const TABLE = 'users';
 
@@ -107,6 +108,11 @@ class User extends Authenticatable
     public function isAdmin(): bool
     {
         return $this->type() === self::ADMIN;
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->type() === self::SUPERADMIN;
     }
 
     public function profile(): HasOne

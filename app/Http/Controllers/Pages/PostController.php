@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Post;
+use App\Policies\PostPolicy;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -12,8 +14,10 @@ class PostController extends Controller
         return view('pages.posts.index');
     }
 
-    public function show()
+    public function show(Post $post)
     {
+        $this->authorize(PostPolicy::UPDATE, $post);
+
         return view('pages.posts.show');
     }
 }
