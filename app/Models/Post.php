@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Casts\TitleClass;
+use App\Casts\TitleCast;
 use App\Contracts\CommentAble;
 use Illuminate\Support\Str;
 use App\Traits\HasAuthor;
@@ -32,6 +32,7 @@ class Post extends Model implements CommentAble
         'photo_credit_text',
         'photo_credit_link',
         'author_id',
+        'is_commentable',
     ];
 
     // eager load the relationships
@@ -43,7 +44,8 @@ class Post extends Model implements CommentAble
 
     protected $casts = [
         'published_at' => 'datetime',
-        'title' => TitleClass::class,
+        'title' => TitleCast::class,
+        'is_commentable' => 'boolean',
     ];
 
     public function id(): int

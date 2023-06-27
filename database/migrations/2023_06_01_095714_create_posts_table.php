@@ -19,6 +19,7 @@ class CreatePostsTable extends Migration
             $table->text('body');
             $table->string('slug');
             $table->string('cover_image');
+            $table->boolean('is_commentable')->default(1);
             $table->timestamp('published_at');
             $table->enum('type', ['standard', 'premium'])->default('standard');
             $table->string('photo_credit_text')->nullable();

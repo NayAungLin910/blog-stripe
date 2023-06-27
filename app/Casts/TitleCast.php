@@ -5,7 +5,7 @@ namespace App\Casts;
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Support\Str;
 
-class TitleClass implements CastsAttributes
+class TitleCast implements CastsAttributes
 {
     public function set($model, string $key, $value, array $attributes)
     {
