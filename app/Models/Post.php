@@ -38,7 +38,7 @@ class Post extends Model implements CommentAble
     // eager load the relationships
     protected $with = [
         'authorRelation',
-        'commentsRelation',
+        // 'commentsRelation',
         'tagsRelation',
     ];
 

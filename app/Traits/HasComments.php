@@ -16,7 +16,7 @@ trait HasComments
     {
         // please beware that the value assigned in id and type
         // might not be in the order
-        return $this->morphMany(__FUNCTION__, 'commentsRelation', 'commentable_type', 'commentable_id');
+        return $this->morphMany(__FUNCTION__, 'commentable_type', 'commentable_id');
     }
 
     public function latestComments(int $amount = 5)
