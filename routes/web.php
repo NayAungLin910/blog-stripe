@@ -23,7 +23,7 @@ use App\Http\Controllers\Pages\MembershipController;
 require 'admin.php';
 
 Route::get('/', HomeController::class)->name('home');
-Route::get('/membership', MembershipController::class)->name('membership');
+Route::get('/membership', [MembershipController::class, 'index'])->name('membership');
 Route::get('/users', [UserController::class, 'index'])->name('users');
 Route::get('/checkout', CheckoutController::class)->name('checkout');
 

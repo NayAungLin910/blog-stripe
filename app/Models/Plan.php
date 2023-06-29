@@ -36,4 +36,39 @@ class Plan extends Model
     {
         return 'slug';
     }
+
+    public function id(): int
+    {
+        return $this->id;
+    }
+
+    public function name(): string
+    {
+        return $this->name;
+    }
+
+    public function slug(): string
+    {
+        return $this->slug;
+    }
+
+    public function stripeName(): string
+    {
+        return $this->stripe_name;
+    }
+
+    public function stripeId(): int
+    {
+        return $this->stripe_id;
+    }
+
+    public function price(): string 
+    {
+        return '$' . $this->price;
+    }
+
+    public function abbreviation(): string 
+    {
+        return $this->abbreviation;
+    }
 }
