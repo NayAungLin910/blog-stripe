@@ -16,8 +16,7 @@
                             Customer information
                         </span>
                     </h2>
-
-
+                    
                     <div class="space-y-2">
                         <x-jet-label for="name" value="{{ __('Name') }}" />
                         <x-jet-input id="name" class="block w-full mt-1" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />

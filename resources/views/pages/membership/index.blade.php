@@ -70,7 +70,7 @@
                     </ul>
                 </div>
             </div>
-
+            
             @foreach($plans as $plan)
                 <div class="border border-gray-200 divide-y divide-gray-200 shadow-lg bg-gray-50">
                     <div class="p-6">
@@ -83,7 +83,7 @@
                         <x-link.primary
                             href="{{ route('payments', ['plan' => $plan->stripeName()]) }}">
                             Sign Up
-                        </x-link.primary>
+                        </x-link.primary>       
                     </div>
                     <div class="px-6 pt-6 pb-8">
                         <h3 class="text-xs font-semibold tracking-wide uppercase">What's included

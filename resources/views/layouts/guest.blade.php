@@ -9,7 +9,7 @@
     <x-partials.nav />
 
     <!-- Page Heading -->
-    @isset($header))
+    @isset($header)
     <header class="relative overlay hero-header">
         <div class="container flex items-center justify-between h-full pt-16 mx-auto">
             <div class="flex-1 space-y-5">
@@ -50,5 +50,7 @@
 
     {{-- Livewire --}}
     <livewire:scripts />
+
+    @stack('scripts')
 </body>
 </html>

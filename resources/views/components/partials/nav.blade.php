@@ -51,11 +51,6 @@
                     <x-jet-nav-link href="{{ route('posts.index') }}" :active="request()->routeIs('posts.index')">
                         {{ __('Post by Tag') }}
                     </x-jet-nav-link>
-
-                    {{-- Checkout --}}
-                    <x-jet-nav-link href="{{ route('checkout') }}" :active="request()->routeIs('checkout')">
-                        {{ __('Checkout') }}
-                    </x-jet-nav-link>
                 </div>
             </div>
 

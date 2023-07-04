@@ -8,6 +8,7 @@ use App\Http\Controllers\Pages\PostController;
 use App\Http\Controllers\Pages\AuthorController;
 use App\Http\Controllers\Pages\CheckoutController;
 use App\Http\Controllers\Pages\MembershipController;
+use App\Http\Controllers\Stripe\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,12 +26,14 @@ require 'admin.php';
 Route::get('/', HomeController::class)->name('home');
 Route::get('/membership', [MembershipController::class, 'index'])->name('membership');
 Route::get('/users', [UserController::class, 'index'])->name('users');
-Route::get('/checkout', CheckoutController::class)->name('checkout');
+
+Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
+Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
 
 /* Name: Authors
  * Url: /authors/*
  * Route: authors.*
-*/
+*/  
 Route::group(['prefix' => 'authors', 'as' => 'authors.'], function () {
     Route::get('/', [AuthorController::class, 'index'])->name('index');
     Route::get('michelle-jones', [AuthorController::class, 'show'])->name('show');
