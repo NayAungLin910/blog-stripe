@@ -12,7 +12,8 @@
             <div class="w-full p-10 m-4 leading-loose border border-gray-200 shadow-lg bg-gray-50">
 
                 {{-- Payment Form --}}
-                <form id="payment-form" class="space-y-8" action="{{ route('payments.store') }}">
+                <form id="payment-form" class="space-y-8" action="{{ route('payments.store') }}" method="POST">
+                    @csrf
 
                     <h2 class="relative font-serif text-xl font-bold">
                         <span class="side-title">
@@ -24,13 +25,13 @@
                     <input type="hidden" name="plan" id="plan" value="{{ request('plan') }}">
 
                     {{-- Payment Method --}}
-                    <input type="hidden" name="payment-method" id="payment-method">
+                    <input type="hidden" name="payment_method" id="payment_method">
 
                     {{-- Name --}}
                     <div class="space-y-2">
                         <x-jet-label for="name" value="{{ __('Name') }}" />
-                        <x-jet-input id="card-holder-name" class="block w-full mt-1" type="text" name="name"
-                            :value="auth()->user()->name()" autocomplete="name" />
+                        <x-jet-input id="name" class="block w-full mt-1" type="text" name="name"
+                            :value="auth()->user()->name() ?? old('name')" autocomplete="name" />
                     </div>
 
                     {{-- Email --}}
@@ -41,37 +42,49 @@
                     </div>
 
                     {{-- Address --}}
+                    {{-- Line One --}}
                     <div class="space-y-2">
                         <x-jet-label for="line1"
                             value="{{ __('Street, PO Box, or Company name') }}" />
                         <x-jet-input id="line1" class="block w-full mt-1" type="text" name="line1"
-                            :value="old('line1')" />
+                            :value="auth()->user()->lineOne() ?? old('line1')" required />
                     </div>
 
+                    {{-- Line Two --}}
                     <div class="space-y-2">
                         <x-jet-label for="line2"
                             value="{{ __('Apartment, Suite, Unit, or Building') }}" />
                         <x-jet-input id="line2" class="block w-full mt-1" type="text" name="line2"
-                            :value="old('line2')" />
+                            :value="auth()->user()->lineTwo() ?? old('line2')" required/>
                     </div>
 
+                    {{-- City --}}
                     <div class="space-y-2">
                         <x-jet-label for="city" value="{{ __('City') }}" />
-                        <x-jet-input id="city" class="block w-full mt-1" type="text" name="city" :value="old('city')"
-                            autocomplete="city" />
+                        <x-jet-input id="city" class="block w-full mt-1" type="text" name="city" :value="auth()->user()->city() ?? old('city')"
+                            autocomplete="city" required/>
                     </div>
 
+                    {{-- State --}}
+                    <div class="space-y-2">
+                        <x-jet-label for="state" value="{{ __('State') }}" />
+                        <x-jet-input id="state" class="block w-full mt-1" type="text" name="state" :value="auth()->user()->state() ?? old('state')"
+                            autocomplete="state" required/>
+                    </div>
+
+                    {{-- Country --}}
                     <div class="inline-block w-1/2 pr-2 ">
                         <x-jet-label for="country" value="{{ __('Country') }}" />
                         <x-jet-input id="country" class="block w-full mt-1" type="text" name="country"
-                            :value="old('country')" autocomplete="country" />
+                            :value="auth()->user()->country() ?? old('country')" autocomplete="country" required />
                     </div>
 
+                    {{-- Postal Code --}}
                     <div class="inline-block w-1/2 pl-2 -mx-1">
                         <x-jet-label for="postal_code"
                             value="{{ __('Postal Code / Zip') }}" />
                         <x-jet-input id="postal_code" class="block w-full mt-1" type="text" name="postal_code"
-                            :value="old('postal_code')" autocomplete="postal_code" />
+                            :value="auth()->user()->postalCode() ?? old('postal_code')" autocomplete="postal_code" rquired />
                     </div>
 
                     <h2 class="relative font-serif text-xl font-bold">
@@ -80,8 +93,16 @@
                         </span>
                     </h2>
 
+                    {{-- Name on Card --}}
                     <div class="space-y-2">
-                        <x-jet-label for="card_information" value="{{ __('Card Information') }}" />
+                        <x-jet-label for="name-card" value="{{ __('Name') }}" />
+                        <x-jet-input id="card-holder-name" class="block w-full mt-1" type="text"
+                            :value="auth()->user()->name() ?? old('name-card')" autocomplete="name" />
+                    </div>
+
+                    {{-- Card Details --}}
+                    <div class="space-y-2">
+                        <x-jet-label for="card_no" value="{{ __('Card Information') }}" />
                         <div id="card-element" class="p-2 py-3 bg-white border border-gray-300 shadow rounded"></div>
                     </div>
 
@@ -118,7 +139,7 @@
                 const displayErrors = document.getElementById('card-errors');
 
                 if (e.error) {
-                    displayErrors.textContent = event.error.message;
+                    displayErrors.textContent = e.error.message;
                 } else {
                     displayErrors.textContent = '';
                 }
@@ -127,9 +148,11 @@
             // Handle Form Submission
             const paymentForm = document.getElementById('payment-form');
 
-            paymentForm.addEventListener('submit', async (e) => {
+            cardButton.addEventListener('click', async (e) => {
                 e.preventDefault();
-                
+
+                console.log('attempting...');
+
                 const {
                     setupIntent,
                     error
@@ -147,10 +170,14 @@
                 if (error) {
                     const displayErrors = document.getElementById('card-errors');
                     displayErrors.textContent = error.message;
+
+                    console.log(error);
                 } else {
                     const paymentMethodInput = document.getElementById('payment_method');
                     paymentMethodInput.value = setupIntent.payment_method;
                     paymentForm.submit();
+
+                    console.log(setupIntent);
                 }
             });
 

@@ -45,6 +45,12 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
+        'line1',
+        'line2',
+        'city',
+        'state',
+        'country',
+        'postal_code',
     ];
 
     /**
@@ -95,6 +101,36 @@ class User extends Authenticatable
     public function type(): int
     {
         return (int) $this->type;
+    }
+
+    public function lineOne(): string|null 
+    {
+        return $this->line1;
+    }
+
+    public function lineTwo(): string|null
+    {
+        return $this->line2;
+    }
+
+    public function country(): string|null
+    {
+        return $this->country;
+    }
+
+    public function city(): string|null
+    {
+        return $this->city;
+    }
+
+    public function state(): string|null
+    {
+        return $this->state;
+    }
+
+    public function postalCode(): string|null
+    {
+        return $this->postal_code;
     }
 
     public function isModerator(): bool

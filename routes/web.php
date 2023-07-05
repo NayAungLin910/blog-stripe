@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Dashboard\BillingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Pages\TagController;
@@ -29,6 +30,10 @@ Route::get('/users', [UserController::class, 'index'])->name('users');
 
 Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
 Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
+
+Route::prefix('/dashboard')->group(function () {
+    Route::get('/billing', [BillingController::class, 'index'])->name('billing');
+});
 
 /* Name: Authors
  * Url: /authors/*
