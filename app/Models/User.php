@@ -13,7 +13,8 @@ use Laravel\Cashier\Billable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
-use PhpParser\Node\Expr\BinaryOp\BooleanOr;
+
+use function Illuminate\Events\queueable;
 
 class User extends Authenticatable
 {
@@ -166,5 +167,32 @@ class User extends Authenticatable
     public function postRelation(): HasMany
     {
         return $this->hasMany(Post::class, 'author_id');
+    }
+
+    /**
+     * Sync the customer information to stripe 
+     * whenever there is an update on the model
+     *
+     * @return void
+     */
+    protected static function booted(): void
+    {
+        static::updated(queueable(function (User $user) {
+            if($user->hasStripeId()) {
+                $user->syncStripeCustomerDetails();
+            }
+        }));
+    }
+
+    public function stripeAddress()
+    {
+        return [
+            'line1' => $this->lineOne(),
+            'line2' => $this->lineTwo(),
+            'city' => $this->city(),
+            'state' => $this->state(),
+            'country' => $this->country(),
+            'postal_code' => $this->postalCode(),
+        ];
     }
 }

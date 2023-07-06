@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Stripe;
 use App\Http\Controllers\Controller;
 use App\Models\Plan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {

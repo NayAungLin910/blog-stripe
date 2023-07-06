@@ -95,9 +95,9 @@
 
                     {{-- Name on Card --}}
                     <div class="space-y-2">
-                        <x-jet-label for="name-card" value="{{ __('Name') }}" />
+                        <x-jet-label for="card-name" value="{{ __('Name on card') }}" />
                         <x-jet-input id="card-holder-name" class="block w-full mt-1" type="text"
-                            :value="auth()->user()->name() ?? old('name-card')" autocomplete="name" />
+                            :value="auth()->user()->name() ?? old('card-name')" autocomplete="name" />
                     </div>
 
                     {{-- Card Details --}}
