@@ -18,7 +18,8 @@ class Plan extends Model
         'name',
         'slug',
         'stripe_name',
-        'stripe_id',
+        'stripe_product_id',
+        'stripe_price_id',
         'price',
         'abbreviation',
     ];
@@ -57,14 +58,19 @@ class Plan extends Model
         return $this->stripe_name;
     }
 
-    public function stripeId(): int
+    public function stripeProductId(): string
     {
-        return $this->stripe_id;
+        return $this->stripe_product_id;
+    }
+
+    public function stripePriceId(): string
+    {
+        return $this->stripe_price_id;
     }
 
     public function price(): string 
     {
-        return '$' . $this->price;
+        return '$' . number_format($this->price, 2);
     }
 
     public function abbreviation(): string 

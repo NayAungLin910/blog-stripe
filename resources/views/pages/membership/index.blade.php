@@ -80,10 +80,16 @@
                             <span class="text-4xl font-extrabold">{{ $plan->price() }}</span>
                             <span class="text-base font-medium text-gray-500">{{ $plan->abbreviation() }}</span>
                         </p>
-                        <x-link.primary
-                            href="{{ route('payments', ['plan' => $plan->stripeName()]) }}">
-                            Sign Up
-                        </x-link.primary>       
+
+                        @subscribedToProduct(auth()->user(), $plan->stripeProductId(), $plan->stripeName())
+                            <h2 class="text-blue-600 font-bold">You are currently subscribed to this plan!</h2>
+                        @else
+                            <x-link.primary
+                                href="{{ route('payments', ['plan' => $plan->stripeName()]) }}">
+                                Sign Up
+                            </x-link.primary>   
+                        @endsubscribedToProduct
+
                     </div>
                     <div class="px-6 pt-6 pb-8">
                         <h3 class="text-xs font-semibold tracking-wide uppercase">What's included

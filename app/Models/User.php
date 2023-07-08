@@ -104,32 +104,32 @@ class User extends Authenticatable
         return (int) $this->type;
     }
 
-    public function lineOne(): string|null 
+    public function lineOne(): ?string 
     {
         return $this->line1;
     }
 
-    public function lineTwo(): string|null
+    public function lineTwo(): ?string
     {
         return $this->line2;
     }
 
-    public function country(): string|null
+    public function country(): ?string
     {
         return $this->country;
     }
 
-    public function city(): string|null
+    public function city(): ?string
     {
         return $this->city;
     }
 
-    public function state(): string|null
+    public function state(): ?string
     {
         return $this->state;
     }
 
-    public function postalCode(): string|null
+    public function postalCode(): ?string
     {
         return $this->postal_code;
     }
