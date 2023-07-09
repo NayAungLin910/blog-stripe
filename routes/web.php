@@ -7,7 +7,6 @@ use App\Http\Controllers\Pages\TagController;
 use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\Pages\PostController;
 use App\Http\Controllers\Pages\AuthorController;
-use App\Http\Controllers\Pages\CheckoutController;
 use App\Http\Controllers\Pages\MembershipController;
 use App\Http\Controllers\Stripe\PaymentController;
 

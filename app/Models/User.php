@@ -54,6 +54,10 @@ class User extends Authenticatable
         'postal_code',
     ];
 
+    protected $with = [
+        'subscriptions'
+    ];
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -134,6 +138,11 @@ class User extends Authenticatable
         return $this->postal_code;
     }
 
+    public function isDefault(): bool
+    {
+        return $this->type() === self::DEFAULT;
+    }
+
     public function isModerator(): bool
     {
         return $this->type() === self::MODERATOR;
@@ -157,6 +166,11 @@ class User extends Authenticatable
     public function profile(): HasOne
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function joinedDate()
+    {
+        return $this->created_at->format('d/m/Y');
     }
 
     public function posts()
