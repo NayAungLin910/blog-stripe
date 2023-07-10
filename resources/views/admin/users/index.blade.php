@@ -14,35 +14,62 @@
                     <tr>
                         <x-table.head>Name</x-table.head>
                         <x-table.head>Bio</x-table.head>
-                        <x-table.head>Birthday</x-table.head>
+                        <x-table.head>Subscription Name & Status</x-table.head>
                         <x-table.head class="text-center">Role</x-table.head>
                         <x-table.head class="text-center">Joined Date</x-table.head>
+                        <x-table.head class="text-center">Action</x-table.head>
                     </tr>
                 </thead>
 
                 <tbody class="divide-y divide-gray-200 divide-solid">
-                    <tr>
-                        <x-table.data>
-                            <div>John Doe</div>
-                        </x-table.data>
-                        <x-table.data>
-                            <div>Some description of bio....</div>
-                        </x-table.data>
-                        <x-table.data>
-                            <div>date</div>
-                        </x-table.data>
-                        <x-table.data>
-                            <div class="px-2 py-1 text-center text-gray-700 bg-green-200 rounded">
-                                Moderator
-                            </div>
-                        </x-table.data>
-                        <x-table.data>
-                            <div class="text-center">2005-14-06</div>
-                        </x-table.data>
-                    </tr>
+                    @foreach($users as $user)
+                        <tr>
+                            <x-table.data>
+                                <div>{{ $user->name() }}</div>
+                            </x-table.data>
+                            <x-table.data>
+                                <div>{{ $user->emailAddress() }}</div>
+                            </x-table.data>
+                            <x-table.data>
+                                <div>
+                                    @foreach($user->subscriptions as $subscription)
+                                        {{ ucfirst($subscription->name) }},
+                                        {{ ucfirst($subscription->stripe_status) }}
+                                    @endforeach
+                                </div>
+                            </x-table.data>
+                            <x-table.data>
+                                <div class="px-2 py-1 text-center text-gray-700 bg-green-200 rounded">
+                                    @if($user->isAdmin() || $user->isSuperAdmin())
+                                        <spa class="" n>Admin</span>
+                                        @elseif($user->isWriter())
+                                            <span class="">Writer</span>
+                                        @elseif($user->isModerator())
+                                            <span class="">Moderator</span>
+                                        @elseif($user->isDefault())
+                                            <span class="">Normal User</span>
+                                    @endif
+                                </div>
+                            </x-table.data>
+                            <x-table.data>
+                                <div class="text-center">
+                                    {{ $user->joinedDate() }}
+                                </div>
+                            </x-table.data>
+                            <x-table.data>
+                                <div class="text-center">
+                                    <div class="text-center">
+                                        Ban, Delete
+                                    </div>
+                                </div>
+                            </x-table.data>
+                        </tr>
+                    @endforeach
                 </tbody>
-
             </table>
+            <div class="p-2 mt-6 bg-gray-200 rounded">
+                {{ $users->render() }}
+            </div>
         </div>
     </section>
 </x-app-layout>

@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['prefix' => 'isAdmin', 'as' => 'admin.'], function () {
 
     Route::get('/dashboard', DashboardController::class)->name('index');
     

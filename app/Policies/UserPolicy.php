@@ -10,6 +10,7 @@ class UserPolicy
     use HandlesAuthorization;
 
     const SUPERADMIN = 'superAdmin';
+    const ADMINROUTE = 'adminRoute';
     const ADMIN = 'admin';
     const BAN = 'ban';
     const DELETE = 'delete';
@@ -17,6 +18,11 @@ class UserPolicy
     public function superAdmin(User $user): bool
     {
         return $user->isAdmin();
+    }
+
+    public function adminRoute(User $user): bool
+    {
+        return $user->isAdmin() || $user->isWriter() || $user->isSuperAdmin();
     }
 
     public function admin(User $user): bool

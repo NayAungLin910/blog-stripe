@@ -37,5 +37,11 @@ class BladeServiceProvider extends ServiceProvider
         Blade::if('subscribedToProduct', function ($user, $id, $name) {
             return $user->subscribedToProduct($id, $name);
         });
+
+        Blade::if('admin', function () {
+            $user = auth()->user();
+            
+            return ($user->isAdmin() || $user->isSuperAdmin() || $user->isWriter());
+        });
     }
 }
