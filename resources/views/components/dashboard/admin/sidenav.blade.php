@@ -28,8 +28,8 @@
                 {{ __('Post') }}
             </x-sidenav.title>
             <div>
-                <x-sidenav.link href="{{ route('profile.show') }}"
-                    :active="request()->routeIs('profile.show')">
+                <x-sidenav.link href="{{ route('admin.posts.index') }}"
+                    :active="request()->routeIs('admin.posts.index')">
                     <x-zondicon-user class="w-3 text-theme-blue-100" />
                     <span>{{ __('index') }}</span>
                 </x-sidenav.link>
@@ -50,8 +50,8 @@
                 {{ __('Tag') }}
             </x-sidenav.title>
             <div>
-                <x-sidenav.link href="{{ route('profile.show') }}"
-                    :active="request()->routeIs('profile.show')">
+                <x-sidenav.link href="{{ route('admin.tags.index') }}"
+                    :active="request()->routeIs('admin.tags.index')">
                     <x-zondicon-user class="w-3 text-theme-blue-100" />
                     <span>{{ __('index') }}</span>
                 </x-sidenav.link>

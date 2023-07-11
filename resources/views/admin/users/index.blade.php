@@ -39,15 +39,21 @@
                                 </div>
                             </x-table.data>
                             <x-table.data>
-                                <div class="px-2 py-1 text-center text-gray-700 bg-green-200 rounded">
+                                <div @class([ 'px-2 py-1 text-center rounded text-gray-700' , 'bg-green-500'=>
+                                    $user->isAdmin() || $user->isSuperAdmin(),
+                                    'bg-blue-500' => $user->isWriter(),
+                                    'bg-red-500' => $user->isModerator(),
+                                    'bg-gray-300' => $user->isDefault()
+                                    ])
+                                    >
                                     @if($user->isAdmin() || $user->isSuperAdmin())
-                                        <spa class="" n>Admin</span>
-                                        @elseif($user->isWriter())
-                                            <span class="">Writer</span>
-                                        @elseif($user->isModerator())
-                                            <span class="">Moderator</span>
-                                        @elseif($user->isDefault())
-                                            <span class="">Normal User</span>
+                                        <span class="">Admin</span>
+                                    @elseif($user->isWriter())
+                                        <span class="">Writer</span>
+                                    @elseif($user->isModerator())
+                                        <span class="">Moderator</span>
+                                    @elseif($user->isDefault())
+                                        <span class="">Normal User</span>
                                     @endif
                                 </div>
                             </x-table.data>
