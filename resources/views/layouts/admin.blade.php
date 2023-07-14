@@ -18,6 +18,8 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+
+        <!-- Admin Layout -->
 </head>
 
 <body class="font-sans antialiased">

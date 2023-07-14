@@ -2,6 +2,8 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <x-partials.head />
+
+    <!-- Guest Layout -->
 </head>
 
 <body class="relative font-sans antialiased">

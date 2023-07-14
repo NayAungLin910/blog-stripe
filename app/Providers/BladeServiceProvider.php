@@ -43,5 +43,9 @@ class BladeServiceProvider extends ServiceProvider
             
             return ($user->isAdmin() || $user->isSuperAdmin() || $user->isWriter());
         });
+
+        Blade::if('writer', function () {
+            return auth()->user()->isWriter();
+        });
     }
 }

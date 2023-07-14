@@ -1,6 +1,6 @@
 <aside class="min-h-screen col-span-1 px-8 bg-white shadow">
     <div class="py-6 space-y-7">
-        {{-- Dashboard --}}
+        <!-- Dashboard -->
         <div>
             <x-sidenav.title>
                 {{ __('Dashboard') }}

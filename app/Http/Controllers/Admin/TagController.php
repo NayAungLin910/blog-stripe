@@ -10,12 +10,20 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
-    public function index()
+    public function __construct()
     {
-        $this->authorize(UserPolicy::SUPERADMIN, User::class);
-        
+        $this->authorizeResource(Tag::class, 'tag');
+    }
+
+    public function index()
+    {        
         $tags = Tag::paginate(20);
 
         return view('admin.tags.index', compact('tags'));
+    }
+
+    public function store(Request $request)
+    {
+        
     }
 }

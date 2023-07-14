@@ -1,6 +1,6 @@
 <aside class="min-h-screen col-span-1 px-8 bg-white shadow">
     <div class="py-6 space-y-7">
-        {{-- Dashboard --}}
+        <!-- Admin Dashboard -->
         <div>
             <x-sidenav.title>
                 {{ __('Dashboard') }}
@@ -12,15 +12,53 @@
                     <span>{{ __('Profile') }}</span>
                 </x-sidenav.link>
             </div>
+        </div>
+
+        @unlesswriter
+        <!-- Users -->
+        <div>
+            <x-sidenav.title>
+                {{ __('Users') }}
+            </x-sidenav.title>
+            <div>
+                <x-sidenav.link href="{{ route('admin.users.index') }}"
+                    :active="request()->routeIs('admin.users.index')">
+                    <x-zondicon-user class="w-3 text-theme-blue-100" />
+                    <span>{{ __('Users') }}</span>
+                </x-sidenav.link>
+            </div>
 
             <div>
                 <x-sidenav.link href="{{ route('admin.users.index') }}"
                     :active="request()->routeIs('admin.users.index')">
                     <x-zondicon-user-group class="w-3 text-theme-blue-100" />
-                    <span>{{ __('Users') }}</span>
+                    <span>{{ __('Create') }}</span>
                 </x-sidenav.link>
             </div>
         </div>
+
+        {{-- Writers --}}
+        <div>
+            <x-sidenav.title>
+                {{ __('Writers') }}
+            </x-sidenav.title>
+            <div>
+                <x-sidenav.link href="{{ route('admin.writers.index') }}"
+                    :active="request()->routeIs('admin.writers.index')">
+                    <x-zondicon-user class="w-3 text-theme-blue-100" />
+                    <span>{{ __('index') }}</span>
+                </x-sidenav.link>
+            </div>
+
+            <div>
+                <x-sidenav.link href="{{ route('admin.users.index') }}"
+                    :active="request()->routeIs('admin.users.index')">
+                    <x-zondicon-user-group class="w-3 text-theme-blue-100" />
+                    <span>{{ __('Create') }}</span>
+                </x-sidenav.link>
+            </div>
+        </div>
+        @endunless
 
         {{-- Post --}}
         <div>
@@ -28,11 +66,20 @@
                 {{ __('Post') }}
             </x-sidenav.title>
             <div>
-                <x-sidenav.link href="{{ route('admin.posts.index') }}"
-                    :active="request()->routeIs('admin.posts.index')">
-                    <x-zondicon-user class="w-3 text-theme-blue-100" />
-                    <span>{{ __('index') }}</span>
-                </x-sidenav.link>
+                @writer
+                    <x-sidenav.link href="{{ route('admin.posts.writer') }}"
+                        :active="request()->routeIs('admin.posts.writer')">
+                        <x-zondicon-user class="w-3 text-theme-blue-100" />
+                        <span>{{ __('index') }}</span>
+                    </x-sidenav.link>
+                @else
+                    <x-sidenav.link href="{{ route('admin.posts.index') }}"
+                        :active="request()->routeIs('admin.posts.index')">
+                        <x-zondicon-user class="w-3 text-theme-blue-100" />
+                        <span>{{ __('index') }}</span>
+                    </x-sidenav.link>
+                @endwriter
+
             </div>
 
             <div>
@@ -44,6 +91,7 @@
             </div>
         </div>
 
+        @unlesswriter()
         {{-- Tag --}}
         <div>
             <x-sidenav.title>
@@ -65,7 +113,8 @@
                 </x-sidenav.link>
             </div>
         </div>
-
+        @endunless
+    
         {{-- Auth --}}
         <div>
             <x-sidenav.title>
