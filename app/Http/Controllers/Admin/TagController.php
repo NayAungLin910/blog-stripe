@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TagRequest;
 use App\Models\Tag;
 use App\Models\User;
 use App\Policies\UserPolicy;
@@ -22,7 +23,12 @@ class TagController extends Controller
         return view('admin.tags.index', compact('tags'));
     }
 
-    public function store(Request $request)
+    public function create(Request $request)
+    {
+        return view('admin.tags.create');
+    }
+
+    public function store(TagRequest $request)
     {
         
     }

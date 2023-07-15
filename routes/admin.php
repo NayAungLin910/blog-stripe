@@ -34,7 +34,5 @@ Route::group([
     });
 
     // Tags
-    Route::group(['prefix' => 'tags', 'as' => 'tags.'], function () {
-        Route::get('/', [TagController::class, 'index'])->name('index');
-    });
+    Route::resource('tags', TagController::class);
 });

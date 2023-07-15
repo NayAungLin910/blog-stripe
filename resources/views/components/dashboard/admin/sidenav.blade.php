@@ -106,8 +106,8 @@
             </div>
 
             <div>
-                <x-sidenav.link href="{{ route('admin.users.index') }}"
-                    :active="request()->routeIs('admin.users.index')">
+                <x-sidenav.link href="{{ route('admin.tags.create') }}"
+                    :active="request()->routeIs('admin.tags.create')">
                     <x-zondicon-user-group class="w-3 text-theme-blue-100" />
                     <span>{{ __('Create') }}</span>
                 </x-sidenav.link>
