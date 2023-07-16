@@ -12,6 +12,7 @@
         "blade-ui-kit/blade-zondicons": "^1.1",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "intervention/image": "^2.7",
         "laravel/cashier": "*",
         "laravel/framework": "^8.54",
         "laravel/jetstream": "^2.3",
