@@ -32,7 +32,7 @@ class TagRequest extends FormRequest
 
     public function name(): string
     {
-        return $this->input('name');
+        return $this->get('name');
     }
 
     public function image(): ?string
@@ -42,6 +42,6 @@ class TagRequest extends FormRequest
 
     public function description(): string
     {
-        return $this->input('description');
+        return $this->get('description');
     }
 }

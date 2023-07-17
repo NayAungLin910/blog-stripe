@@ -36,6 +36,7 @@
                             <x-table.data>
                                 <div class="text-center">
                                     <div class="text-center">
+                                        <a class="bg-blue-200 p-1" href="{{ route('admin.tags.edit', $tag) }}">Edit</a>
                                         Ban, Delete
                                     </div>
                                 </div>

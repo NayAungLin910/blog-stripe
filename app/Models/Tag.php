@@ -40,9 +40,9 @@ class Tag extends Model
         return $this->image;
     }
 
-    public function description(): string
+    public function description(): ?string
     {
-        return $this->description ;
+        return $this->description;
     }
 
     public function getRoutekeyName()

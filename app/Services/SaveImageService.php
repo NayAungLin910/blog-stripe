@@ -8,25 +8,14 @@ use Intervention\Image\Facades\Image;
 
 class SaveImageService
 {
-    public static function uploadImage($requestImage, $model, $folder)
+    public static function uploadImage($image, $model, $folder)
     {
-        // Option One
-        $path = Storage::putFile($folder, new File($requestImage));
+        $path = Storage::putFile('public/' . $folder, new File($image));
 
-        Image::make($requestImage)->resize(1200, 630)->save($path);
+        $targetPath = storage_path('app/' . $path);
+
+        Image::make($image)->resize(1200, 630)->save($targetPath);
 
         $model->image = $path;
-
-        // // Option Two
-        // $image = $requestImage;
-
-        // $imageName = $image->getClientOriginalName();
-        // $imageNewName = explode('.', $imageName)[0];
-
-        // $fileExtension = time() . $imageNewName . '.' . $image->getClientOriginalExtension();
-        // $location = storage_path('app/public/' . $folder . '/' . $fileExtension);
-        // Image::make($image)->resize(1200, 630)->save($location);
-        
-        // $model->image = $fileExtension;
     }
 }

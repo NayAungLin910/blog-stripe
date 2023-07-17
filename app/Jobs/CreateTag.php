@@ -16,9 +16,9 @@ class CreateTag implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    private $name;
-    private $image;
-    private $description;
+    public $name;
+    public $image;
+    public $description;
 
     /**
      * Create a new job instance.
@@ -32,28 +32,24 @@ class CreateTag implements ShouldQueue
         $this->description = $description;
     }
 
-    public static function formRequest(TagRequest $request): self
+    public static function fromRequest(TagRequest $request): self
     {
         return new static(
             $request->name(),
             $request->image(),
-            $request->description()
+            $request->description(),
         );
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle(): Tag
+    public function handle()
     {
         $tag = new Tag([
             'name' => $this->name,
+            'slug' => '',
             'description' => $this->description,
         ]);
 
-        SaveImageService::uploadImage($this->image, $tag, Tag::TABLE);
+        SaveImageService::uploadImage($this->image, $tag, TAG::TABLE);
 
         $tag->save();
 
