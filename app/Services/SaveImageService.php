@@ -17,5 +17,7 @@ class SaveImageService
         Image::make($image)->resize(1200, 630)->save($targetPath);
 
         $model->image = $path;
+
+        $model->save();
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TagRequest;
 use App\Jobs\CreateTag;
+use App\Jobs\DeleteTag;
+use App\Jobs\UpdateTag;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -39,10 +41,17 @@ class TagController extends Controller
         return view('admin.tags.edit', compact('tag'));
     }
 
-    public function update(Request $request, Tag $tag)
+    public function update(TagRequest $request, Tag $tag)
     {
         $this->dispatchSync(UpdateTag::fromRequest($tag, $request));
 
         return redirect()->route('admin.tags.index')->with('success', 'Tag Updated!');
+    }
+
+    public function destroy(Tag $tag)
+    {
+        $this->dispatchSync(new DeleteTag($tag));
+
+        return redirect()->route('admin.tags.index')->with('success', 'Tag Deleted!');
     }
 }

@@ -34,11 +34,18 @@
                                 </div>
                             </x-table.data>
                             <x-table.data>
-                                <div class="text-center">
-                                    <div class="text-center">
+                                <div class="flex items-center justify-center space-x-4">
+
+                                        {{-- Edit --}}
                                         <a class="bg-blue-200 p-1" href="{{ route('admin.tags.edit', $tag) }}">Edit</a>
-                                        Ban, Delete
-                                    </div>
+                                        
+                                        {{-- Delete --}}
+                                        <x-form action="{{ route('admin.tags.destroy', $tag) }}" method="DELETE">
+                                            <button class="bg-red-200 p-1" type="submit">
+                                                Delete
+                                            </button>
+                                        </x-form>
+
                                 </div>
                             </x-table.data>
                         </tr>

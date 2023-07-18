@@ -27,7 +27,8 @@ class TagObserver
      */
     public function updated(Tag $tag)
     {
-        //
+        $tag->slug = Str::slug($tag->name);
+        $tag->save();
     }
 
     /**

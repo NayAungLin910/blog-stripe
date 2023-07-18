@@ -51,8 +51,6 @@ class CreateTag implements ShouldQueue
 
         SaveImageService::uploadImage($this->image, $tag, TAG::TABLE);
 
-        $tag->save();
-
         return $tag;
     }
 }
