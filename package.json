@@ -21,6 +21,7 @@
         "tailwindcss": "^2.2.2"
     },
     "dependencies": {
-        "aos": "^3.0.0-beta.6"
+        "aos": "^3.0.0-beta.6",
+        "choices.js": "^10.2.0"
     }
 }

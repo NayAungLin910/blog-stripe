@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        return $this->authorizeResource(Post::class, 'post');
+    }
+
     public function create()
     {
         return view('admin.posts.create');
@@ -17,10 +22,13 @@ class PostController extends Controller
 
     public function index()
     {
-        $this->authorize(UserPolicy::SUPERADMIN, User::class);
-
         $posts = Post::paginate(5);
 
         return view('admin.posts.index', compact('posts'));
+    }
+
+    public function store(Request $request)
+    {
+        
     }
 }
