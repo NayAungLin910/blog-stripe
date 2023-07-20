@@ -19,12 +19,15 @@
 
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
 
-    @livewireStyles
+    <!-- blade ui kit style -->
+    @bukStyles(true)
 
-        <!-- Scripts -->
-        <script src="{{ mix('js/app.js') }}" defer></script>
+        @livewireStyles
 
-        <!-- Admin Layout -->
+            <!-- Scripts -->
+            <script src="{{ mix('js/app.js') }}" defer></script>
+
+            <!-- Admin Layout -->
 </head>
 
 <body class="font-sans antialiased">
@@ -72,6 +75,9 @@
     </div>
 
     @stack('modals')
+
+    <!-- blade ui kit scripts -->
+    @bukScripts(true)
 
     @livewireScripts
 </body>

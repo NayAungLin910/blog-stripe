@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostRequest;
 use App\Models\Post;
+use App\Models\Tag;
 use App\Models\User;
 use App\Policies\UserPolicy;
 use Illuminate\Http\Request;
@@ -17,7 +19,8 @@ class PostController extends Controller
 
     public function create()
     {
-        return view('admin.posts.create');
+        $tags = Tag::all();
+        return view('admin.posts.create', compact('tags'));
     }
 
     public function index()
@@ -27,8 +30,8 @@ class PostController extends Controller
         return view('admin.posts.index', compact('posts'));
     }
 
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        
+        return $request;
     }
 }

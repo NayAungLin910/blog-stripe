@@ -31,6 +31,7 @@ Route::group([
         Route::get('/create', [PostController::class, 'create'])->name('create');
         Route::get('/', [PostController::class, 'index'])->name('index');
         ROute::get('/writer', [WriterPostController::class, 'index'])->name('writer');
+        Route::post('/store', [PostController::class, 'store'])->name('store');
     });
 
     // Tags
