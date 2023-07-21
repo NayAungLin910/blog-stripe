@@ -16,12 +16,11 @@
             <x-form action="{{ route('admin.posts.store') }}" has-files>
                 <div class="space-y-8">
 
-                    {{-- Cover Image --}}
+                    {{-- Image --}}
                     <div>
-                        <x-form.label for="cover_image" value="{{ __('Cover Image') }}" />
-                        <x-form.input name="cover_image" id="cover_image" class="block w-full mt-1" type="file"
-                            required />
-                        <x-form.error for="cover_image" />
+                        <x-form.label for="image" value="{{ __('Image') }}" />
+                        <x-form.input name="image" id="image" class="block w-full mt-1" type="file" required />
+                        <x-form.error for="image" />
                     </div>
 
                     {{-- Title --}}
@@ -73,10 +72,11 @@
                         <x-form.error for="photo_credit_link" />
                     </div>
 
-                    {{-- Allow Comments --}}
+                    {{-- Disable Comments --}}
                     <div class="">
-                        <x-form.label class="inline-block" for="is_commentable" value="{{ __('Allow Comments') }}" />
-                        <x-checkbox name="is_commentable" id="is_commentable" />
+                        <x-form.label class="inline-block" for="is_commentable"
+                            value="{{ __('Disable Comments') }}" />
+                        <x-checkbox value="1" name="is_commentable" id="is_commentable" />
                     </div>
 
                     {{-- Tags --}}
@@ -93,6 +93,8 @@
                     <x-buttons.primary>
                         {{ __('Create') }}
                     </x-buttons.primary>
+
+                </div>
             </x-form>
         </div>
     </section>

@@ -27,22 +27,24 @@ class TagTableSeeder extends Seeder
      */
     public function run()
     {
-        $tags = collect([
-            $this->createTag('Outdoors', 'outdoors'),
-            $this->createTag('Health', 'health'),
-            $this->createTag('Environment', 'environment'),
-            $this->createTag('Fitness', 'fitness'),
-            $this->createTag('Beauty', 'beauty'),
-            $this->createTag('DIY', 'd-i-y'),
-        ]);
+        $tags = Tag::factory()->count(6)->create();
 
-        Post::all()->each(function ($post) use ($tags) {
-            $post->syncTags(
-                $tags->random(rand(0, $tags->count()))
-                    ->take(3)
-                    ->pluck('id')
-                    ->toArray()
-            );
-        });
+        // $tags = collect([
+        //     $this->createTag('Outdoors', 'outdoors'),
+        //     $this->createTag('Health', 'health'),
+        //     $this->createTag('Environment', 'environment'),
+        //     $this->createTag('Fitness', 'fitness'),
+        //     $this->createTag('Beauty', 'beauty'),
+        //     $this->createTag('DIY', 'd-i-y'),
+        // ]);
+
+        // Post::all()->each(function ($post) use ($tags) {
+        //     $post->syncTags(
+        //         $tags->random(rand(0, $tags->count()))
+        //             ->take(3)
+        //             ->pluck('id')
+        //             ->toArray()
+        //     );
+        // });
     }
 }

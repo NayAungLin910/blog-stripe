@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
+use App\Jobs\CreatePost;
 use App\Models\Post;
 use App\Models\Tag;
 use App\Models\User;
@@ -32,6 +33,8 @@ class PostController extends Controller
 
     public function store(PostRequest $request)
     {
-        return $request;
+        $this->dispatchSync(CreatePost::fromRequest($request));
+
+        return redirect()->route('admin.posts.index')->with('success', 'Post created successfully!');
     }
 }

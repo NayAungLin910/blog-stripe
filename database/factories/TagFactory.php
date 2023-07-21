@@ -14,9 +14,12 @@ class TagFactory extends Factory
      */
     public function definition()
     {
+        $title = $this->faker->text(20) . uniqid();
         return [
-            'name' => $this->faker->text(15),
-            'slug' => $this->faker->slug,
+            'name' => $title,
+            'slug' => Str::slug($title),
+            'image' => 'stock-one.jpg',
+            'description' => $this->faker->paragraph(),
         ];
     }
 }

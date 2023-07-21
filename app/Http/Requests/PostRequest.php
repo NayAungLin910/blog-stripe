@@ -27,20 +27,20 @@ class PostRequest extends FormRequest
         return [
             'title' => "required|max:100",
             'body' => 'required',
-            'cover_image' => 'sometimes|image|mimes:svg,png,jpg',
+            'image' => 'sometimes|image|mimes:svg,png,jpg',
             'published_at' => 'required',
             'type' => 'required|in:standard,premium',
             'photo_credit_link' => 'nullable',
             'photo_credit_text' => 'nullable',
             'tags' => 'array|nullable',
             'tags.*' => 'exists:tags,id',
-            'is_commentable' => 'required|boolean',
+            'is_commentable' => 'nullable|boolean',
         ];
     }
 
     public function author(): User
     {
-        return $this->user;
+        return $this->user();
     }
 
     public function title(): string
@@ -53,9 +53,9 @@ class PostRequest extends FormRequest
         return $this->get('body');
     }
 
-    public function coverImage(): ?string
+    public function image(): ?string
     {
-        return $this->cover_image;
+        return $this->image;
     }
 
     public function publishedAt(): string

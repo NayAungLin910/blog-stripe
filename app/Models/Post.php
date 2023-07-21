@@ -26,7 +26,7 @@ class Post extends Model implements CommentAble
         'title',
         'body',
         'slug',
-        'cover_image',
+        'image',
         'published_at',
         'type',
         'photo_credit_text',
@@ -68,9 +68,9 @@ class Post extends Model implements CommentAble
         return Str::limit(strip_tags($this->body()), $limit);
     }
 
-    public function coverImage(): string
+    public function image(): string
     {
-        return $this->cover_image;
+        return $this->image;
     }
 
     public function delete()

@@ -22,7 +22,7 @@ class PostFactory extends Factory
             'slug' => Str::slug($title),
             'body' => $this->faker->paragraph(2),
             'author_id' => $attribute['author_id'] ?? User::factory(),
-            'cover_image' => 'stock-one.jpg',
+            'image' => 'stock-one.jpg',
             'published_at' => now(),
             'type' => $this->faker->randomElement(['standard', 'premium']),
             'is_commentable' => rand(0, 1),
