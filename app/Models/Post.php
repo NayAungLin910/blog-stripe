@@ -58,9 +58,39 @@ class Post extends Model implements CommentAble
         return $this->title;
     }
 
+    public function slug(): string
+    {
+        return $this->slug;
+    }
+
     public function body(): string
     {
         return $this->body;
+    }
+
+    public function publishedAt(): string
+    {
+        return $this->published_at;
+    }
+
+    public function type(): string
+    {
+        return $this->type;
+    }
+
+    public function photoCreditText(): ?string
+    {
+        return $this->photo_credit_text;
+    }
+
+    public function photoCreditLink(): ?string
+    {
+        return $this->photo_credit_link;
+    }
+
+    public function isCommentable(): bool
+    {
+        return $this->is_commentable;
     }
 
     public function excerpt(int $limit = 250): string
@@ -82,5 +112,10 @@ class Post extends Model implements CommentAble
     public function commentAbleTitle(): string
     {
         return $this->title();
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
     }
 }

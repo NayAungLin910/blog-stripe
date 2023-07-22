@@ -22,12 +22,12 @@
     <!-- blade ui kit style -->
     @bukStyles(true)
 
-        @livewireStyles
+    @livewireStyles
 
-            <!-- Scripts -->
-            <script src="{{ mix('js/app.js') }}" defer></script>
+    <!-- Scripts -->
+    <script src="{{ mix('js/app.js') }}" defer></script>
 
-            <!-- Admin Layout -->
+    <!-- Admin Layout -->
 </head>
 
 <body class="font-sans antialiased">
@@ -41,17 +41,17 @@
 
             {{-- Sidenav --}}
             @admin
-                <x-dashboard.admin.sidenav />
+            <x-dashboard.admin.sidenav />
             @endadmin
 
             <div class="col-span-7">
                 <!-- Page Heading -->
                 @if(isset($header))
-                    <header class="mx-6 mt-6 text-gray-600 shadow bg-theme-blue-100">
-                        <div class="px-4 py-6 wrapper">
-                            {{ $header }}
-                        </div>
-                    </header>
+                <header class="mx-6 mt-6 text-gray-600 shadow bg-theme-blue-100">
+                    <div class="px-4 py-6 wrapper">
+                        {{ $header }}
+                    </div>
+                </header>
                 @endif
 
                 {{-- Alerts --}}

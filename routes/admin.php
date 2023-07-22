@@ -32,6 +32,9 @@ Route::group([
         Route::get('/', [PostController::class, 'index'])->name('index');
         ROute::get('/writer', [WriterPostController::class, 'index'])->name('writer');
         Route::post('/store', [PostController::class, 'store'])->name('store');
+        Route::get('{post}/edit', [PostController::class, 'edit'])->name('edit');
+        Route::put('{post}', [PostController::class, 'update'])->name('update');
+        Route::delete('{post}', [PostController::class, 'destroy'])->name('delete');
     });
 
     // Tags

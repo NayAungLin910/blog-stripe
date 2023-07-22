@@ -23,36 +23,38 @@
 
                 <tbody class="divide-y divide-gray-200 divide-solid">
                     @foreach($posts as $post)
-                        <tr>
-                            <x-table.data>
-                                <div>{{ $post->title() }}</div>
-                            </x-table.data>
-                            <x-table.data>
-                                <div>{{ $post->excerpt(50) }}</div>
-                            </x-table.data>
-                            <x-table.data>
-                                <div>
-                                    {{ $post->author()->name() }}
-                                </div>
-                            </x-table.data>
-                            <x-table.data>
-                                <div class="text-center text-gray-700">
-                                    {{ $post->created_at }}
-                                </div>
-                            </x-table.data>
-                            <x-table.data>
+                    <tr>
+                        <x-table.data>
+                            <div>{{ $post->title() }}</div>
+                        </x-table.data>
+                        <x-table.data>
+                            <div>{{ $post->excerpt(50) }}</div>
+                        </x-table.data>
+                        <x-table.data>
+                            <div>
+                                {{ $post->author()->name() }}
+                            </div>
+                        </x-table.data>
+                        <x-table.data>
+                            <div class="text-center text-gray-700">
+                                {{ $post->created_at }}
+                            </div>
+                        </x-table.data>
+                        <x-table.data>
+                            <div class="text-center">
+                                {{ $post->published_at }}
+                            </div>
+                        </x-table.data>
+                        <x-table.data>
+                            <div class="text-center">
                                 <div class="text-center">
-                                    {{ $post->published_at }}
+
+                                    {{-- Edit --}}
+                                    <a class="bg-blue-200 p-1" href="{{ route('admin.posts.edit', $post->slug()) }}">Edit</a>
                                 </div>
-                            </x-table.data>
-                            <x-table.data>
-                                <div class="text-center">
-                                    <div class="text-center">
-                                        Ban, Delete
-                                    </div>
-                                </div>
-                            </x-table.data>
-                        </tr>
+                            </div>
+                        </x-table.data>
+                    </tr>
                     @endforeach
                 </tbody>
             </table>

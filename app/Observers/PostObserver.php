@@ -15,7 +15,7 @@ class PostObserver
      */
     public function created(Post $post)
     {
-        $post->slug = Str::slug($post->name, '-' . now()->timestamp);
+        $post->slug = Str::slug($post->title(), '-' . now()->timestamp);
         $post->save();
     }
 
