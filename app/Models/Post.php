@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 use App\Traits\HasAuthor;
 use App\Traits\HasComments;
 use App\Traits\HasTags;
+use DateTime;
+use Illuminate\Database\Eloquent\Builder;
 
 class Post extends Model implements CommentAble
 {
@@ -117,5 +119,13 @@ class Post extends Model implements CommentAble
     public function getRouteKeyName(): string
     {
         return 'slug';
+    }
+
+    public static function scopeLoadLatest(Builder $query, $count = 4)
+    {
+        return $query->whereNotNull('published_at')
+            ->where('published_at', '<=', new DateTime())
+            ->latest()
+            ->paginate($count);
     }
 }

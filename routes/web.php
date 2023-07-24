@@ -49,7 +49,7 @@ Route::group(['prefix' => 'authors', 'as' => 'authors.'], function () {
 */
 Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
     Route::get('/', [PostController::class, 'index'])->name('index');
-    Route::get('/title-of-post', [PostController::class, 'show'])->name('show');
+    Route::get('/{post}', [PostController::class, 'show'])->name('show');
 });
 
 /* Name: Tags

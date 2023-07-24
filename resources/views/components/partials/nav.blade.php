@@ -46,12 +46,6 @@
                         {{ __('Authors Single') }}
                     </x-jet-nav-link>
 
-                    {{-- Post Single --}}
-                    <x-jet-nav-link href="{{ route('posts.show') }}"
-                        :active="request()->routeIs('posts.show')">
-                        {{ __('Post Single') }}
-                    </x-jet-nav-link>
-
                     {{-- Post Tag --}}
                     <x-jet-nav-link href="{{ route('posts.index') }}"
                         :active="request()->routeIs('posts.index')">

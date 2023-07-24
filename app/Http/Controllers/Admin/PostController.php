@@ -5,11 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostRequest;
 use App\Jobs\CreatePost;
+use App\Jobs\DeletePost;
 use App\Jobs\UpdatePost;
 use App\Models\Post;
 use App\Models\Tag;
-use App\Models\User;
-use App\Policies\UserPolicy;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -57,6 +56,8 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        $this->dispatchSync(new DeletePost($post));
 
+        return redirect()->route('admin.posts.index')->with('success', 'Post Deleted!');
     }
 }

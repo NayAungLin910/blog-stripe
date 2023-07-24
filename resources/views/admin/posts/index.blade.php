@@ -50,7 +50,17 @@
                                 <div class="text-center">
 
                                     {{-- Edit --}}
-                                    <a class="bg-blue-200 p-1" href="{{ route('admin.posts.edit', $post->slug()) }}">Edit</a>
+                                    <x-link.warning href="{{ route('admin.posts.edit', $post) }}">
+                                        {{ __('Edit') }}
+                                    </x-link.warning>
+
+                                    {{-- Delete --}}
+                                    <x-form action="{{ route('admin.posts.delete', $post) }}" method="DELETE">
+                                        <x-buttons.danger>
+                                            {{ __('Delete') }}
+                                        </x-buttons.danger>
+                                    </x-form>
+
                                 </div>
                             </div>
                         </x-table.data>

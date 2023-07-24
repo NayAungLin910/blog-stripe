@@ -10,6 +10,8 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
+    const UPDATE = 'update';
+
     /**
      * Determine whether the user can view any models.
      *

@@ -30,7 +30,7 @@ Route::group([
     Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
         Route::get('/create', [PostController::class, 'create'])->name('create');
         Route::get('/', [PostController::class, 'index'])->name('index');
-        ROute::get('/writer', [WriterPostController::class, 'index'])->name('writer');
+        Route::get('/writer', [WriterPostController::class, 'index'])->name('writer');
         Route::post('/store', [PostController::class, 'store'])->name('store');
         Route::get('{post}/edit', [PostController::class, 'edit'])->name('edit');
         Route::put('{post}', [PostController::class, 'update'])->name('update');

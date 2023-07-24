@@ -15,14 +15,14 @@ class PostFactory extends Factory
      */
     public function definition()
     {
-        $title = $this->faker->text(20);
+        $title = $this->faker->sentence();
 
         return [
             'title' => $title,
-            'slug' => Str::slug($title),
-            'body' => $this->faker->paragraph(2),
+            'slug' => Str::slug($title . '-' . now()->getPreciseTimestamp(3)),
+            'body' => $this->faker->paragraph(10),
             'author_id' => $attribute['author_id'] ?? User::factory(),
-            'image' => 'stock-one.jpg',
+            'image' => 'public/posts/stock-' . $this->faker->randomElement(['one', 'two', 'three', 'four', 'five']) . '.jpg',
             'published_at' => now(),
             'type' => $this->faker->randomElement(['standard', 'premium']),
             'is_commentable' => rand(0, 1),
