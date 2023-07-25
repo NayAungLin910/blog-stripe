@@ -2,6 +2,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
+{{-- Facebook --}}
+<meta property="og:description" content="@yield('description')" />
+<meta property="og:image" content="@yield('meta-image')" />
+<meta property="og:image:type" content="image/jpeg" />
+
+{{-- Twitter --}}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:site" content="@blog" />
+<meta name="twitter:image" content="@yield('twitterImage')" /> 
+<meta name="twitter:description" content="@yield('twitterDescription')" />
+<meta name="twitter:title" content="@yield('twitterTitle')" />   
+
 <title>{{ config('app.name', 'Laravel') }}</title>
 
 <!-- Fonts -->

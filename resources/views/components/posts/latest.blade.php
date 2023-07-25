@@ -1,6 +1,6 @@
 <article class="flex" data-aos="fade-up">
     <a href="{{ route('posts.show', $post) }}" class="post-image">
-        <img class="object-cover w-full h-full" src="{{ asset('storage' . substr($post->image(), strpos($post->image(), '/', 0)) ) }}" alt="{{ "The post
+        <img class="object-cover w-full h-full" src="{{ $post->publicImageLink() }}" alt="{{ "The post
             titled, " . $post->title() . "'s image" }}">
     </a>
     <section class="relative flex-1">

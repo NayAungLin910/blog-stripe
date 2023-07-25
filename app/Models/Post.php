@@ -75,6 +75,11 @@ class Post extends Model implements CommentAble
         return $this->published_at;
     }
 
+    public function pubishedAtDate(): string
+    {
+        return $this->published_at->format('d F Y');
+    }
+
     public function type(): string
     {
         return $this->type;
@@ -127,5 +132,10 @@ class Post extends Model implements CommentAble
             ->where('published_at', '<=', new DateTime())
             ->latest()
             ->paginate($count);
+    }
+
+    public function publicImageLink(): string
+    {
+        return asset('storage' . substr($this->image(), strpos($this->image(), '/', 0)) );
     }
 }

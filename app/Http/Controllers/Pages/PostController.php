@@ -9,6 +9,11 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        return $this->middleware(['auth', 'verified'])->only(['show']);
+    }
+
     public function index()
     {
         return view('pages.posts.index');
@@ -16,8 +21,6 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
-        $this->authorize(PostPolicy::UPDATE, $post);
-
-        return view('pages.posts.show');
+        return view('pages.posts.show', compact('post'));
     }
 }
