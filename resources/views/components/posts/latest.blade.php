@@ -1,9 +1,9 @@
 <article class="flex" data-aos="fade-up">
     <a href="{{ route('posts.show', $post) }}" class="post-image">
-        <img class="object-cover w-full h-full" src="{{ $post->publicImageLink() }}" alt="{{ "The post
+        <img class="object-cover w-full h-full" src="{{ $post->publicImageLink() }}" alt="{{ " The post
             titled, " . $post->title() . "'s image" }}">
     </a>
-    <section class="relative flex-1">
+    <section class="relative flex-1">   
         <div class="mt-16 space-y-8">
 
             {{-- Tags --}}
@@ -11,6 +11,16 @@
                 @foreach ($post->tags() as $tag)
                 <a href="#" class="text-sm font-bold uppercase text-theme-blue-100">{{ $tag->name() }}</a>
                 @endforeach
+
+                @if ($post->isPremium())
+                {{-- Premium Tag --}}
+                <div class="absoluate top-0">
+                    <h2 class="p-2 bg-gray-800 text-gray-200 uppercase">
+                        Premium
+                    </h2>
+                </div>  
+                @endif
+                
             </div>
 
             {{-- Title --}}
@@ -29,7 +39,7 @@
         <div class="absolute flex justify-between w-full bottom-8">
             <div class="flex items-center space-x-4">
                 <a href="#">
-                    <img class="object-cover w-12 h-12 rounded" src="{{ asset('img/authors/author-one.jpg') }}"
+                    <img class="object-cover w-12 h-12 rounded" src="{{ asset(' img/authors/author-one.jpg') }}"
             alt="">
     </a>
     <div class="">

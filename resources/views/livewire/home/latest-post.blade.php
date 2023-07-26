@@ -7,6 +7,7 @@
         @endforeach
 
     </div>
+    
     <div class="flex justify-center my-16">
         @if ($posts->hasMorePages())
         <x-jet-button wire:click="loadMore">

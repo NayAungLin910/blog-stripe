@@ -2,19 +2,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
+<meta name="description" conent="@yield('description')" />
+<meta name="keywords" content="@yield('keywords')" />
+
 {{-- Facebook --}}
 <meta property="og:description" content="@yield('description')" />
-<meta property="og:image" content="@yield('meta-image')" />
+<meta property="og:image" content="@yield('metaImage')" />
 <meta property="og:image:type" content="image/jpeg" />
 
 {{-- Twitter --}}
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@blog" />
-<meta name="twitter:image" content="@yield('twitterImage')" /> 
-<meta name="twitter:description" content="@yield('twitterDescription')" />
-<meta name="twitter:title" content="@yield('twitterTitle')" />   
+<meta name="twitter:site" content="{{ config('settings.twitter.handle') }}" />
+<meta name="twitter:image" content="@yield('metaImage')" />
+<meta name="twitter:description" content="@yield('description')" />
+<meta name="twitter:title" content="@yield('title')" />
 
-<title>{{ config('app.name', 'Laravel') }}</title>
+<title>@yield('title', 'BOLD')</title>
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">

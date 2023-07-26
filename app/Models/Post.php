@@ -85,6 +85,11 @@ class Post extends Model implements CommentAble
         return $this->type;
     }
 
+    public function isPremium(): bool
+    {
+        return $this->type() === 'premium';
+    }
+
     public function photoCreditText(): ?string
     {
         return $this->photo_credit_text;
