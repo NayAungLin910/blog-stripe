@@ -79,24 +79,10 @@
 
                 </div>
 
-                <div class="space-y-6">
-                    <div class="border-b-2 border-theme-blue-100">
-                        <h2 class="inline-block p-2 text-sm text-white uppercase rounded-t bg-theme-blue-100">
-                            Post a comment
-                        </h2>
-                    </div>
-                    <span class="block">10 Comments</span>
-
-                    <div class="pb-16">
-                        <x-form action="">
-                            <x-textarea name="about"
-                                class="w-full border-gray-200 rounded focus:border-theme-blue-100 focus:ring focus:ring-theme-blue-100 focus:ring-opacity-50">
-                                Enter your comment
-                            </x-textarea>
-                        </x-form>
-                    </div>
-                </div>
-
+                {{-- Comments --}}
+                @if ($post->isCommentable())
+                <x-posts.comments />
+                @endif
             </article>
 
             @else
@@ -178,29 +164,14 @@
 
                 </div>
 
-                <div class="space-y-6">
-                    <div class="border-b-2 border-theme-blue-100">
-                        <h2 class="inline-block p-2 text-sm text-white uppercase rounded-t bg-theme-blue-100">
-                            Post a comment
-                        </h2>
-                    </div>
-                    <span class="block">10 Comments</span>
-
-                    <div class="pb-16">
-                        <x-form action="">
-                            <x-textarea name="about"
-                                class="w-full border-gray-200 rounded focus:border-theme-blue-100 focus:ring focus:ring-theme-blue-100 focus:ring-opacity-50">
-                                Enter your comment
-                            </x-textarea>
-                        </x-form>
-                    </div>
-                </div>
+                {{-- Comments --}}
+                @if ($post->isCommentable())
+                <x-posts.comments />
+                @endif
 
             </article>
 
             @endif
-
-
             {{-- Side nav --}}
             <x-sidenav.post />
 
