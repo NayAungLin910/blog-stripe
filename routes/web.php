@@ -7,6 +7,7 @@ use App\Http\Controllers\Pages\TagController;
 use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\Pages\PostController;
 use App\Http\Controllers\Pages\AuthorController;
+use App\Http\Controllers\Pages\CommentController;
 use App\Http\Controllers\Pages\MembershipController;
 use App\Http\Controllers\Stripe\PaymentController;
 
@@ -58,6 +59,10 @@ Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
 */
 Route::group(['prefix' => 'tags', 'as' => 'tags.'], function () {
     Route::get('/', [TagController::class, 'index'])->name('index');
+});
+
+Route::prefix('comments')->as('comments.')->group(function () {
+    Route::post('/', [CommentController::class, 'store'])->name('store');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
