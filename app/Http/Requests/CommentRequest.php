@@ -46,7 +46,7 @@ class CommentRequest extends FormRequest
         return $this->get('body');
     }
 
-    public function parent_id(): ?string
+    public function parentId(): ?string
     {
         return $this->get('parent_id');
     }
@@ -56,7 +56,7 @@ class CommentRequest extends FormRequest
         return $this->get('depth');
     }
 
-    public function commentable(): CommentAble
+    public function commentAble(): CommentAble
     {
         return $this->findCommentAble($this->get('commentable_id'), $this->get('commentable_type'));
     }

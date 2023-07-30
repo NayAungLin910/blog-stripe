@@ -166,7 +166,7 @@
 
                 {{-- Comments --}}
                 @if ($post->isCommentable())
-                <x-posts.comments />
+                <x-posts.comments :post="$post" />
                 @endif
 
             </article>

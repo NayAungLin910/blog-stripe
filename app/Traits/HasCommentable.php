@@ -7,8 +7,6 @@ use App\Contracts\CommentAble;
 
 trait HasCommentable
 {
-
-
     public function commentAbleRelation(): MorphTo
     {
         return $this->morphTo('commentAbleRelation', 'commentable_type', 'commentable_id');

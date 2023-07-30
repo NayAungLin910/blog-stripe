@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\Comment;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 trait HasComments
@@ -13,9 +14,7 @@ trait HasComments
 
     public function commentsRelation(): MorphMany
     {
-        // please beware that the value assigned in id and type
-        // might not be in the order
-        return $this->morphMany(__FUNCTION__, 'commentable_type', 'commentable_id');
+        return $this->morphMany(Comment::class, 'commentsRelation', 'commentable_type', 'commentable_id');
     }
 
     public function latestComments(int $amount = 5)
@@ -29,6 +28,6 @@ trait HasComments
             $comment->delete();
         }
 
-        $this->unsetRelation('commentsRelation');
+        // $this->unsetRelation('commentsRelation');
     }
 }
