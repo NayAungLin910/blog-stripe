@@ -134,7 +134,7 @@ class Post extends Model implements CommentAble
     public static function scopeLoadLatest(Builder $query, $count = 4)
     {
         return $query->whereNotNull('published_at')
-            ->where('published_at', '<=', new DateTime())
+            ->published()
             ->latest()
             ->paginate($count);
     }
@@ -142,5 +142,18 @@ class Post extends Model implements CommentAble
     public function publicImageLink(): string
     {
         return asset('storage' . substr($this->image(), strpos($this->image(), '/', 0)) );
+    }
+
+    public function scopePublished(Builder $query): Builder
+    {
+        return $query->where('published_at', '<=', new DateTime());
+    }
+
+    public function scopeForTag(Builder $query, string $tag): Builder
+    {
+        return $query->published()
+        ->whereHas('tagsRelation', function ($query) use ($tag) {
+            $query->where('tags.slug', $tag);
+        });
     }
 }

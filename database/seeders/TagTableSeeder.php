@@ -15,9 +15,9 @@ class TagTableSeeder extends Seeder
      * @param string $slug
      * @return Tag
      */
-    private function createTag(string $name, string $slug): Tag
+    private function createTag(string $name, string $slug, string $image): Tag
     {
-        return Tag::factory()->create(compact('name', 'slug'));
+        return Tag::factory()->create(compact('name', 'slug', 'image'));
     }
 
     /**
@@ -27,24 +27,23 @@ class TagTableSeeder extends Seeder
      */
     public function run()
     {
-        $tags = Tag::factory()->count(6)->create();
 
-        // $tags = collect([
-        //     $this->createTag('Outdoors', 'outdoors'),
-        //     $this->createTag('Health', 'health'),
-        //     $this->createTag('Environment', 'environment'),
-        //     $this->createTag('Fitness', 'fitness'),
-        //     $this->createTag('Beauty', 'beauty'),
-        //     $this->createTag('DIY', 'd-i-y'),
-        // ]);
+        $tags = collect([
+            $this->createTag('Outdoors', 'outdoors', 'public/tags/outdoors.jpg'),
+            $this->createTag('Health', 'health', 'public/tags/health.jpg'),
+            $this->createTag('Environment', 'environment', 'public/tags/environment.jpg'),
+            $this->createTag('Fitness', 'fitness', 'public/tags/fitness.jpg'),
+            $this->createTag('Beauty', 'beauty', 'public/tags/beauty.jpg'),
+            $this->createTag('DIY', 'd-i-y', 'public/tags/diy.jpg'),
+        ]);
 
-        // Post::all()->each(function ($post) use ($tags) {
-        //     $post->syncTags(
-        //         $tags->random(rand(0, $tags->count()))
-        //             ->take(3)
-        //             ->pluck('id')
-        //             ->toArray()
-        //     );
-        // });
+        Post::all()->each(function ($post) use ($tags) {
+            $post->syncTags(
+                $tags->random(rand(0, $tags->count()))
+                    ->take(3)
+                    ->pluck('id')
+                    ->toArray()
+            );
+        });
     }
 }

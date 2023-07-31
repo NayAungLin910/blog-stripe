@@ -59,6 +59,7 @@ Route::group(['prefix' => 'posts', 'as' => 'posts.'], function () {
 */
 Route::group(['prefix' => 'tags', 'as' => 'tags.'], function () {
     Route::get('/', [TagController::class, 'index'])->name('index');
+    Route::get('/{tag}', [TagController::class, 'show'])->name('show');
 });
 
 Route::prefix('comments')->as('comments.')->group(function () {

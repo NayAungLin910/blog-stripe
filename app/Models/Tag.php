@@ -40,6 +40,11 @@ class Tag extends Model
         return $this->image;
     }
 
+    public function publicImageLink(): string
+    {
+        return asset('storage' . substr($this->imagePath(), strpos($this->imagePath(), '/', 0)) );
+    }
+
     public function description(): ?string
     {
         return $this->description;
