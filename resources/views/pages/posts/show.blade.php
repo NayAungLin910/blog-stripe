@@ -59,6 +59,12 @@
                             <span class="text-gray-600">
                                 Posted: {{ $post->pubishedAtDate() }}
                             </span>
+
+                            {{-- Minutes Read --}}
+                            <span class="text-gray-600">
+                                {{ $post->readTime() }} minute(s) read
+                            </span>
+
                         </div>
 
                         {{-- Body --}}
@@ -144,6 +150,12 @@
                             <span class="text-gray-600">
                                 Posted: {{ $post->pubishedAtDate() }}
                             </span>
+
+                            {{-- Minutes Read --}}
+                            <span class="text-gray-600">
+                                {{ $post->readTime() }} minute(s) read
+                            </span>
+
                         </div>
 
                         {{-- Body --}}

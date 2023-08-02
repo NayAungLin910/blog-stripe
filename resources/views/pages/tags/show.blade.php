@@ -39,10 +39,12 @@
         </div>
 
         {{-- Pagination --}}
+        @if ($posts->hasPages())
         <div class="p-4 my-20 bg-gray-100">
             {{ $posts->links() }}
         </div>
-        
+        @endif
+
     </section>
 
 </x-guest-layout>

@@ -19,7 +19,6 @@ $depth = ($comment->depth * 8)
         </h1>
         <p class="text-base text-gray-600">
             {{ $comment->body() }}
-            {{ dump($loop->depth) }}
         </p>
 
         {{-- Reply --}}
@@ -33,7 +32,7 @@ $depth = ($comment->depth * 8)
 </div>
 
 @if($comment->replies())
-<x-posts.replies :comments="$comment->replies()" :post=$post />
+<x-posts.replies :comments="$comment->replies()" :post="$post" />
 @endif
 
 @endforeach

@@ -121,6 +121,13 @@ class Post extends Model implements CommentAble
         parent::delete();
     }
 
+    public function readTime()
+    {
+        $minutes = round(str_word_count(strip_tags($this->body())) / 200);
+
+        return $minutes == 0 ? 1 : $minutes;
+    }
+
     public function commentAbleTitle(): string
     {
         return $this->title();

@@ -20,4 +20,9 @@ trait HasReplies
     {
         return $this->depth >= config('settings.comments.max') - 1;
     }
+
+    public function maximumReplies(): bool
+    {
+        return $this->repliesRelation->count() >= config('settings.replies.max');
+    }
 }
