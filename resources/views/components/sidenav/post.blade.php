@@ -8,36 +8,27 @@
             </span>
         </h2>
         <div class="">
-            <img src="{{ asset('img/authors/author-four.jpg') }}" alt="Author Four">
+            <img src="{{ $author->profile_photo_url }}" alt="The author {{ $author->profile_photo_url }}">
         </div>
 
         <div class="">
             <p class="text-sm tracking-wide text-gray-700">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Temporibus maiores dicta consectetur, eligendi tenetur corporis suscipit? Expedita asperiores in quod.
+                {{ $author->bioProfile() }}
             </p>
         </div>
 
         {{-- Stats --}}
         <div class="">
             <span class="px-4 py-1 text-white bg-gray-800">
-                24 Post[s]
+                {{ $author->posts()->count() }} Post[s]
             </span>
         </div>
 
         {{-- Socials --}}
         <div class="flex space-x-4">
-            <a href="#">
-                <x-fab-facebook-f class="h-4 text-theme-blue-00" />
-            </a>
-            <a href="#">
-                <x-fab-twitter class="h-4 text-theme-blue-00" />
-            </a>
-            <a href="#">
-                <x-fab-instagram-square class="h-4 text-theme-blue-00" />
-            </a>
-            <a href="#">
-                <x-fab-linkedin-in class="h-4 text-theme-blue-00" />
-            </a>
+
+            <x-social.profile :author="$author" />
+
         </div>
 
         {{-- Button --}}

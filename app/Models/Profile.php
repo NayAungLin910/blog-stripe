@@ -43,7 +43,7 @@ class Profile extends Model
         return $this->instagram;
     }
 
-    public function linkedin(): string
+    public function linkedIn(): string
     {
         return $this->linkedin;
     }

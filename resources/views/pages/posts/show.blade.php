@@ -1,6 +1,7 @@
 <x-guest-layout>
 
     @section('title', "BOLD | Blog: $post->title")
+
     @section('keywords')
     @foreach ($post->tags() as $tag)
     {{ $tag->name() }},
@@ -48,7 +49,8 @@
                             <div class="flex items-center space-x-4">
                                 <a href="#">
                                     <img class="object-cover w-12 h-12 rounded"
-                                        src="{{ asset('img/authors/author-four.jpg') }}" alt="Author One">
+                                        src="{{ $post->author()->profile_photo_url }}"
+                                        alt="The author, {{ $post->author()->name() }}'s image">
                                 </a>
                                 <div class="">
                                     <h3 class="text-xl font-bold">{{ $post->author()->name() }}</h3>
@@ -139,7 +141,7 @@
                             <div class="flex items-center space-x-4">
                                 <a href="#">
                                     <img class="object-cover w-12 h-12 rounded"
-                                        src="{{ asset('img/authors/author-four.jpg') }}" alt="Author One">
+                                        src="{{ $post->author()->profile_photo_url }}" alt="Author One">
                                 </a>
                                 <div class="">
                                     <h3 class="text-xl font-bold">{{ $post->author()->name() }}</h3>
@@ -184,8 +186,9 @@
             </article>
 
             @endif
+            
             {{-- Side nav --}}
-            <x-sidenav.post />
+            <x-sidenav.post :author="$post->author()"/>
 
         </div>
     </section>

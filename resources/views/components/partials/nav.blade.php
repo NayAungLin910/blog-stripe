@@ -40,12 +40,6 @@
                         {{ __('Authors') }}
                     </x-jet-nav-link>
 
-                    {{-- Authors Single --}}
-                    <x-jet-nav-link href="{{ route('authors.show') }}"
-                        :active="request()->routeIs('authors.show')">
-                        {{ __('Authors Single') }}
-                    </x-jet-nav-link>
-
                     {{-- Post Tag --}}
                     <x-jet-nav-link href="{{ route('posts.index') }}"
                         :active="request()->routeIs('posts.index')">

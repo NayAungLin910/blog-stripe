@@ -41,7 +41,7 @@ Route::prefix('/dashboard')->group(function () {
 */  
 Route::group(['prefix' => 'authors', 'as' => 'authors.'], function () {
     Route::get('/', [AuthorController::class, 'index'])->name('index');
-    Route::get('michelle-jones', [AuthorController::class, 'show'])->name('show');
+    Route::get('/{user:name}', [AuthorController::class, 'show'])->name('show');
 });
 
 /* Name: Posts

@@ -14,6 +14,7 @@ use Laravel\Cashier\Billable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 use function Illuminate\Events\queueable;
 
@@ -56,7 +57,8 @@ class User extends Authenticatable
     ];
 
     protected $with = [
-        'subscriptions'
+        'subscriptions',
+        'profile',
     ];
 
     /**
@@ -96,8 +98,12 @@ class User extends Authenticatable
      */
     public function getProfilePhotoUrlAttribute()
     {
+        // return $this->profile_photo_path
+        //             ? Storage::disk($this->profilePhotoDisk())->url($this->profile_photo_path)
+        //             : $this->defaultProfilePhotoUrl();
+
         return $this->profile_photo_path
-                    ? Storage::disk($this->profilePhotoDisk())->url($this->profile_photo_path)
+                    ? asset('storage/' . $this->profile_photo_path)
                     : $this->defaultProfilePhotoUrl();
     } 
 
@@ -119,6 +125,37 @@ class User extends Authenticatable
     public function type(): int
     {
         return (int) $this->type;
+    }
+
+    // Social
+    public function bioProfile()
+    {
+        return $this->profile->bio();
+    }
+
+    public function bioProfileExcerpt($limit = 80)
+    {
+        return Str::limit($this->bioProfile(), $limit);
+    }
+
+    public function facebookProfile()
+    {
+        return $this->profile->facebook();
+    }
+
+    public function twitterProfile()
+    {
+        return $this->profile->twitter();
+    }
+
+    public function instagramProfile()
+    {
+        return $this->profile->instagram();
+    }
+
+    public function linkedInProfile()
+    {
+        return $this->profile->linkedIn();
     }
 
     public function lineOne(): ?string 

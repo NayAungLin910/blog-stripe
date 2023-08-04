@@ -140,9 +140,8 @@ class Post extends Model implements CommentAble
 
     public static function scopeLoadLatest(Builder $query, $count = 4)
     {
-        return $query->whereNotNull('published_at')
-            ->published()
-            ->latest()
+        return $query->published()
+            ->inRandomOrder()
             ->paginate($count);
     }
 

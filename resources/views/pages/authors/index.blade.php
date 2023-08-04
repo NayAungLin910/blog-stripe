@@ -10,102 +10,57 @@
 
         <div class="gap-8 my-16 space-y-4 sm:grid sm:grid-cols-2 lg:grid-cols-4 sm:space-y-0">
 
-            {{-- Author Single --}}
-            <div class="transition duration-500 transform bg-white shadow-lg hover:shadow-xl hover:scale-105" data-aos="fade-up">
-                <img class="w-full" src="{{ asset('img/authors/author-one.jpg') }}" />
-                <div class="px-4 py-4 space-y-4">
-                    <h1 class="font-serif text-2xl font-bold font-gray-700">Jane Doe</h1>
-                    <p class="text-sm tracking-normal">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dolore, rem vel nam excepturi veritatis.
-                    </p>
-                    <div class="flex pt-8 space-x-4">
-                        <a href="#">
-                            <x-fab-facebook-f class="h-4 text-theme-blue-200" />
-                        </a>
-                        <a href="#">
-                            <x-fab-twitter class="h-4 text-theme-blue-200" />
-                        </a>
-                        <a href="#">
-                            <x-fab-instagram-square class="h-4 text-theme-blue-200" />
-                        </a>
-                        <a href="#">
-                            <x-fab-linkedin-in class="h-4 text-theme-blue-200" />
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="transition duration-500 transform bg-white shadow-lg hover:shadow-xl hover:scale-105" data-aos="fade-up">
-                <img class="w-full" src="{{ asset('img/authors/author-two.jpg') }}" />
-                <div class="px-4 py-4 space-y-4">
-                    <h1 class="font-serif text-2xl font-bold font-gray-700">David Rouge</h1>
-                    <p class="text-sm tracking-normal">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dolore, rem vel nam excepturi veritatis.
-                    </p>
-                    <div class="flex pt-8 space-x-4">
-                        <a href="#">
-                            <x-fab-facebook-f class="h-4 text-theme-blue-200" />
-                        </a>
-                        <a href="#">
-                            <x-fab-twitter class="h-4 text-theme-blue-200" />
-                        </a>
-                        <a href="#">
-                            <x-fab-instagram-square class="h-4 text-theme-blue-200" />
-                        </a>
-                        <a href="#">
-                            <x-fab-linkedin-in class="h-4 text-theme-blue-200" />
-                        </a>
+            {{-- Authors --}}
+            @foreach ($authors as $author)
+            <div class="transition duration-500 transform bg-white shadow-lg hover:shadow-xl hover:scale-105"
+                data-aos="fade-up">
 
-                    </div>
-                </div>
-            </div>
-            <div class="transition duration-500 transform bg-white shadow-lg hover:shadow-xl hover:scale-105" data-aos="fade-up">
-                <img class="w-full" src="{{ asset('img/authors/author-three.jpg') }}" />
-                <div class="px-4 py-4 space-y-4">
-                    <h1 class="font-serif text-2xl font-bold font-gray-700">John Gray</h1>
-                    <p class="text-sm tracking-normal">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dolore, rem vel nam excepturi veritatis.
-                    </p>
-                    <div class="flex pt-8 space-x-4">
-                        <a href="#">
-                            <x-fab-facebook-f class="h-4 text-theme-blue-200" />
-                        </a>
-                        <a href="#">
-                            <x-fab-twitter class="h-4 text-theme-blue-200" />
-                        </a>
-                        <a href="#">
-                            <x-fab-instagram-square class="h-4 text-theme-blue-200" />
-                        </a>
-                        <a href="#">
-                            <x-fab-linkedin-in class="h-4 text-theme-blue-200" />
-                        </a>
+                <a href="{{ route('authors.show', $author) }}">
 
-                    </div>
-                </div>
-            </div>
-            <div class="transition duration-500 transform bg-white shadow-lg hover:shadow-xl hover:scale-105" data-aos="fade-up">
-                <img class="w-full" src="{{ asset('img/authors/author-four.jpg') }}" />
-                <div class="px-4 py-4 space-y-4">
-                    <h1 class="font-serif text-2xl font-bold font-gray-700">Michelle Jones</h1>
-                    <p class="text-sm tracking-normal">
-                        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloribus dolore, rem vel nam excepturi veritatis.
-                    </p>
-                    <div class="flex pt-8 space-x-4">
-                        <a href="#">
-                            <x-fab-facebook-f class="h-4 text-theme-blue-200" />
-                        </a>
-                        <a href="#">
-                            <x-fab-twitter class="h-4 text-theme-blue-200" />
-                        </a>
-                        <a href="#">
-                            <x-fab-instagram-square class="h-4 text-theme-blue-200" />
-                        </a>
-                        <a href="#">
-                            <x-fab-linkedin-in class="h-4 text-theme-blue-200" />
-                        </a>
+                    {{-- Profile Image --}}
+                    <img class="w-full" src="{{ asset($author->profile_photo_url) }}" />
 
+                    <div class="px-4 py-4 space-y-4">
+                        <h1 class="font-serif text-2xl font-bold font-gray-700">
+                            {{ $author->name() }}
+                        </h1>
+                        <p class="text-sm tracking-normal">
+                            {{ $author->bioProfileExcerpt() }}
+                        </p>
+                        <div class="flex pt-8 space-x-4">
+
+                            @if (!empty($author->facebookProfile()))
+                            <a href="{{ $author->facebookProfile() }}" target="_blank">
+                                <x-fab-facebook-f class="h-4 text-theme-blue-200" />
+                            </a>
+                            @endif
+
+                            @if (!empty($author->twitterProfile()))
+                            <a href="{{ $author->twitterProfile() }}" target="_blank">
+                                <x-fab-twitter class="h-4 text-theme-blue-200" />
+                            </a>
+                            @endif
+
+                            @if (!empty($author->instagramProfile()))
+                            <a href="{{ $author->instagramProfile() }}" target="_blank">
+                                <x-fab-instagram-square class="h-4 text-theme-blue-200" />
+                            </a>
+                            @endif
+
+                            @if (!empty($author->linkedInProfile()))
+                            <a href="{{ $author->linkedInProfile() }}" target="_blank">
+                                <x-fab-linkedin-in class="h-4 text-theme-blue-200" />
+                            </a>
+                            @endif
+
+                        </div>
                     </div>
-                </div>
+
+                </a>
+            
             </div>
+            @endforeach
+
         </div>
 
     </section>

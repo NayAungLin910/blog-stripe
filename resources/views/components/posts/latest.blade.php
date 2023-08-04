@@ -39,8 +39,8 @@
         <div class="absolute flex justify-between w-full bottom-8">
             <div class="flex items-center space-x-4">
                 <a href="#">
-                    <img class="object-cover w-12 h-12 rounded" src="{{ asset(' img/authors/author-one.jpg') }}"
-            alt="">
+                    <img class="object-cover w-12 h-12 rounded" src="{{ $post->author()->getProfilePhotoUrlAttribute() }}"
+            alt="The author, {{ $post->author()->name() }}'s image">
     </a>
     <div class="">
         <h3 class="text-xl font-bold">{{ $post->author()->name() }}</h3>

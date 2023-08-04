@@ -3,17 +3,24 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Post;
+use App\Models\User;
 
 class AuthorController extends Controller
 {
     public function index()
     {
-        return view('pages.authors.index');
+        $authors = User::where('type', User::WRITER)->get();
+
+        return view('pages.authors.index', compact('authors'));
     }
 
-    public function show()
+    public function show(User $user)
     {
-        return view('pages.authors.show');
+        $author = $user;
+        
+        $posts = Post::where('author_id', $user->id())->paginate(4);
+
+        return view('pages.authors.show', compact('author', 'posts'));
     }
 }

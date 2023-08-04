@@ -20,6 +20,7 @@ class UserTableSeeder extends Seeder
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
             'type' => User::ADMIN,
+            'profile_photo_path' => 'profile-photos/author-one.jpg'
         ])->profile()->save(Profile::factory()->make());
 
         User::factory()->create([
@@ -27,6 +28,7 @@ class UserTableSeeder extends Seeder
             'email' => 'writer@example.com',
             'password' => bcrypt('password'),
             'type' => User::WRITER,
+            'profile_photo_path' => 'profile-photos/author-two.jpg'
         ])->profile()->save(Profile::factory()->make());
 
         User::factory()->create([
@@ -34,6 +36,7 @@ class UserTableSeeder extends Seeder
             'email' => 'mod@example.com',
             'password' => bcrypt('password'),
             'type' => User::MODERATOR,
+            'profile_photo_path' => 'profile-photos/author-three.jpg'
         ])->profile()->save(Profile::factory()->make());
 
         User::factory()->create([
@@ -41,6 +44,7 @@ class UserTableSeeder extends Seeder
             'email' => 'johndoe@example.com',
             'password' => bcrypt('password'),
             'type' => User::DEFAULT,
+            'profile_photo_path' => 'profile-photos/author-four.jpg'
         ])->profile()->save(Profile::factory()->make());
 
         User::factory(10)->create()->each(function ($user) {

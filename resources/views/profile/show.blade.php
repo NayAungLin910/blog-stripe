@@ -13,13 +13,14 @@
                 <x-jet-section-border />
             @endif
 
-            @if (Laravel\Fortify\Features::enabled(Laravel\Fortify\Features::updatePasswords()))
+            {{-- Social Links --}}
+            @writer()
                 <div class="mt-10 sm:mt-0">
-                    @livewire('profile.update-password-form')
+                    @livewire('profile.social')
                 </div>
 
                 <x-jet-section-border />
-            @endif
+            @endwriter
 
             @if (Laravel\Fortify\Features::canManageTwoFactorAuthentication())
                 <div class="mt-10 sm:mt-0">
