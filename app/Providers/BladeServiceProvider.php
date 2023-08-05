@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 
@@ -36,6 +37,10 @@ class BladeServiceProvider extends ServiceProvider
 
         Blade::if('subscribedToProduct', function ($user, $id, $name) {
             return $user->subscribedToProduct($id, $name);
+        });
+
+        Blade::if('onGracePeriod', function ($plan) {
+            return Auth::user()->subscription($plan)->onGracePeriod();
         });
 
         Blade::if('admin', function () {

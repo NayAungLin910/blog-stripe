@@ -9,6 +9,7 @@ use App\Http\Controllers\Pages\PostController;
 use App\Http\Controllers\Pages\AuthorController;
 use App\Http\Controllers\Pages\CommentController;
 use App\Http\Controllers\Pages\MembershipController;
+use App\Http\Controllers\Pages\SubscriptionController;
 use App\Http\Controllers\Stripe\PaymentController;
 
 /*
@@ -30,6 +31,16 @@ Route::get('/users', [UserController::class, 'index'])->name('users');
 
 Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
 Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
+
+/**
+ * Name: subscriptions
+ * Url: /subscriptions/*
+ * Route: subscriptions.*
+ */
+Route::prefix('subscriptions')->as('subscriptions.')->group(function () {
+    Route::get('/resume/{subscription}', [SubscriptionController::class, 'update'])->name('update');
+    Route::get('/cancel/{subscription}', [SubscriptionController::class, 'destroy'])->name('destroy');
+});
 
 Route::prefix('/dashboard')->group(function () {
     Route::get('/billing', [BillingController::class, 'index'])->name('billing');

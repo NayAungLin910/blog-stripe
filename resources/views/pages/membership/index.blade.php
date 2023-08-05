@@ -8,7 +8,10 @@
             <hr class="self-center w-40 border-b-4 border-theme-blue-200">
         </header>
 
-        <div class="grid grid-cols-3 gap-8 my-16" data-aos="fade-up" data-aos-offset="100" data-aos-duration="500">
+        {{-- Alert Message --}}
+        <x-alerts.main />
+
+        <div class="grid grid-cols-3 gap-8 my-16">
 
             {{-- Free Plan --}}
             <div class="border border-gray-200 divide-y divide-gray-200 shadow-lg bg-gray-50">
@@ -18,15 +21,6 @@
                     <p class="mt-8">
                         <span class="text-4xl font-extrabold">$0.00</span>
                     </p>
-                    <x-jet-button class="mt-6">
-                        {{ __("Sign Up") }}
-                        <svg style="height: 1.25rem;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
-                            class="fill-current">
-                            <path class="heroicon-ui"
-                                d="M9.3 8.7a1 1 0 0 1 1.4-1.4l4 4a1 1 0 0 1 0 1.4l-4 4a1 1 0 0 1-1.4-1.4l3.29-3.3-3.3-3.3z">
-                            </path>
-                        </svg>
-                    </x-jet-button>
 
                 </div>
                 <div class="px-6 pt-6 pb-8">
@@ -70,68 +64,95 @@
                     </ul>
                 </div>
             </div>
-            
+
             @foreach($plans as $plan)
-                <div class="border border-gray-200 divide-y divide-gray-200 shadow-lg bg-gray-50">
-                    <div class="p-6">
-                        <h2 class="text-2xl font-semibold leading-6 text-gray-900">{{ $plan->name() }}</h2>
-                        <p class="mt-4 text-sm leading-normal">Awesome packages</p>
-                        <p class="mt-8">
-                            <span class="text-4xl font-extrabold">{{ $plan->price() }}</span>
-                            <span class="text-base font-medium text-gray-500">{{ $plan->abbreviation() }}</span>
-                        </p>
+            <div class="border border-gray-200 divide-y divide-gray-200 shadow-lg bg-gray-50">
+                <div class="p-6">
+                    <h2 class="text-2xl font-semibold leading-6 text-gray-900">{{ $plan->name() }}</h2>
+                    <p class="mt-4 text-sm leading-normal">Awesome packages</p>
+                    <p class="mt-8">
+                        <span class="text-4xl font-extrabold">{{ $plan->price() }}</span>
+                        <span class="text-base font-medium text-gray-500">{{ $plan->abbreviation() }}</span>
+                    </p>
 
-                        @subscribedToProduct(auth()->user(), $plan->stripeProductId(), $plan->stripeName())
-                            <h2 class="text-blue-600 font-bold">You are currently subscribed to this plan!</h2>
-                        @else
-                            <x-link.primary
-                                href="{{ route('payments', ['plan' => $plan->stripeName()]) }}">
-                                Sign Up
-                            </x-link.primary>   
-                        @endsubscribedToProduct
+                    @subscribedToProduct($user, $plan->stripeProductId(), $plan->stripeName())
 
-                    </div>
-                    <div class="px-6 pt-6 pb-8">
-                        <h3 class="text-xs font-semibold tracking-wide uppercase">What's included
-                        </h3>
-                        <ul class="mt-6 space-y-4">
-                            <li class="flex space-x-3">
-                                <x-heroicon-o-check class="flex-shrink-0 w-5 h-5 text-green-500" />
-                                <span class="text-xs leading-normal">
-                                    Some huge benefit
-                                </span>
-                            </li>
+                    {{-- Subscription Message --}}
+                    <h2 class="text-blue-600 font-bold mb-3">You are currently subscribed to this plan!</h2>
 
-                            <li class="flex space-x-3">
-                                <x-heroicon-o-check class="flex-shrink-0 w-5 h-5 text-green-500" />
-                                <span class="text-xs leading-normal">
-                                    Crazy offer
-                                </span>
-                            </li>
 
-                            <li class="flex space-x-3">
-                                <x-heroicon-o-check class="flex-shrink-0 w-5 h-5 text-green-500" />
-                                <span class="text-xs leading-normal">
-                                    Used Laravel 8 to make this
-                                </span>
-                            </li>
+                    {{-- On Grace Period --}}
+                    @onGracePeriod($plan->stripeName())
 
-                            <li class="flex space-x-3">
-                                <x-heroicon-o-check class="flex-shrink-0 w-5 h-5 text-green-500" />
-                                <span class="text-xs leading-normal">
-                                    Tailwind is awesome
-                                </span>
-                            </li>
+                    <h2 class="text-yellow-600 font-bold mb-3">
+                        Your subscription will end on
+                        {{ $user->subscription($plan->stripeName())->ends_at->format('d F Y') }}
+                    </h2>
 
-                            <li class="flex space-x-3">
-                                <x-heroicon-o-check class="flex-shrink-0 w-5 h-5 text-green-500" />
-                                <span class="text-xs leading-normal">
-                                    AOS js library for some extra effects
-                                </span>
-                            </li>
-                        </ul>
-                    </div>
+                    {{-- Resume Button --}}
+                    <a href="{{ route('subscriptions.update', $plan->stripeName()) }}"
+                        class="transition-all duration-150 text-white bg-green-600 hover:bg-green-500 p-2 shadow rounded-md">
+                        Resume Subscription
+                    </a>
+
+                    @else
+
+                    {{-- Cancel Button --}}
+                    <a href="{{ route('subscriptions.destroy', $plan->stripeName()) }}"
+                        class="transition-all duration-150 text-white bg-red-600 hover:bg-red-500 p-2 shadow rounded-md">
+                        Cancel Subscription
+                    </a>
+
+                    @endonGracePeriod
+
+                    @else
+                    <x-link.primary href="{{ route('payments', ['plan' => $plan->stripeName()]) }}">
+                        Sign Up
+                    </x-link.primary>
+                    @endsubscribedToProduct
+
                 </div>
+                <div class="px-6 pt-6 pb-8">
+                    <h3 class="text-xs font-semibold tracking-wide uppercase">What's included
+                    </h3>
+                    <ul class="mt-6 space-y-4">
+                        <li class="flex space-x-3">
+                            <x-heroicon-o-check class="flex-shrink-0 w-5 h-5 text-green-500" />
+                            <span class="text-xs leading-normal">
+                                Some huge benefit
+                            </span>
+                        </li>
+
+                        <li class="flex space-x-3">
+                            <x-heroicon-o-check class="flex-shrink-0 w-5 h-5 text-green-500" />
+                            <span class="text-xs leading-normal">
+                                Crazy offer
+                            </span>
+                        </li>
+
+                        <li class="flex space-x-3">
+                            <x-heroicon-o-check class="flex-shrink-0 w-5 h-5 text-green-500" />
+                            <span class="text-xs leading-normal">
+                                Used Laravel 8 to make this
+                            </span>
+                        </li>
+
+                        <li class="flex space-x-3">
+                            <x-heroicon-o-check class="flex-shrink-0 w-5 h-5 text-green-500" />
+                            <span class="text-xs leading-normal">
+                                Tailwind is awesome
+                            </span>
+                        </li>
+
+                        <li class="flex space-x-3">
+                            <x-heroicon-o-check class="flex-shrink-0 w-5 h-5 text-green-500" />
+                            <span class="text-xs leading-normal">
+                                AOS js library for some extra effects
+                            </span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             @endforeach
 
         </div>
