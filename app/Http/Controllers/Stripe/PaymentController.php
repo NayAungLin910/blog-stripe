@@ -33,7 +33,13 @@ class PaymentController extends Controller
         $plan = Plan::where('stripe_name', $request->plan)->first();
 
         // create a new subscription for the user
-        $user->newSubscription($plan->stripe_name, $plan->stripe_price_id)->create($paymentMethod);
+        $user->newSubscription($plan->stripe_name, $plan->stripe_price_id)
+            ->create($paymentMethod);
+
+        // ends the trial period
+        $user->update([
+            'trial_ends_at' => null,
+        ]);
 
         return redirect()->route('billing')->with('success', 'Thank you for subscribing!');
     }

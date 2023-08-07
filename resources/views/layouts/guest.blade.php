@@ -42,6 +42,23 @@
     @endisset
 
     <div class="font-sans antialiased">
+
+        @auth
+            @if (auth()->user()->onGenericTrial())
+                <div class="pt-16">
+                    <div class="p-2 bg-blue-500">
+                        <h2 class="container mx-auto text-white">
+                            You are currently on a free trial that will end in
+                            {{ now()->diffInDays(auth()->user()->trial_ends_at) }} day(s)
+                            @if (!request()->routeIs('membership'))
+                                You can subscribe <a class="underline " href="{{ route('membership') }}">Here</a> 
+                            @endif
+                        </h2>
+                    </div>
+                </div>
+            @endif
+        @endauth
+
         {{ $slot }}
     </div>
 

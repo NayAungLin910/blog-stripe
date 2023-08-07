@@ -77,9 +77,17 @@
 
                     @subscribedToProduct($user, $plan->stripeProductId(), $plan->stripeName())
 
+                    {{-- Trial Message --}}
+                    @onTrial($user, $plan->stripeName())
+
+                    <h2 class="text-blue-600 font-bold mb-3">
+                        You are trial will end on {{ $user->trialEndsAt($plan->stripeName())->format('d F Y') }}!
+                    </h2>
+
+                    @else
+
                     {{-- Subscription Message --}}
                     <h2 class="text-blue-600 font-bold mb-3">You are currently subscribed to this plan!</h2>
-
 
                     {{-- On Grace Period --}}
                     @onGracePeriod($plan->stripeName())
@@ -105,10 +113,14 @@
 
                     @endonGracePeriod
 
+                    @endonTrial()
+
                     @else
+                    
                     <x-link.primary href="{{ route('payments', ['plan' => $plan->stripeName()]) }}">
                         Sign Up
                     </x-link.primary>
+
                     @endsubscribedToProduct
 
                 </div>

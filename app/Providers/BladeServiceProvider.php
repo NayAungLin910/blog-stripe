@@ -43,6 +43,10 @@ class BladeServiceProvider extends ServiceProvider
             return Auth::user()->subscription($plan)->onGracePeriod();
         });
 
+        Blade::if('onTrial', function ($user, $plan) {
+            return $user->subscription($plan)->onTrial();
+        });
+
         Blade::if('admin', function () {
             $user = auth()->user();
             

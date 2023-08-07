@@ -54,6 +54,7 @@ class User extends Authenticatable
         'state',
         'country',
         'postal_code',
+        'trial_ends_at',
     ];
 
     protected $with = [
@@ -80,6 +81,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'trial_ends_at' => 'datetime',
     ];
 
     /**

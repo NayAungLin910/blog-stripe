@@ -17,7 +17,7 @@ class UserPolicy
 
     public function superAdmin(User $user): bool
     {
-        return $user->isAdmin() || $user->superAdmin();
+        return $user->isAdmin() || $user->isSuperAdmin();
     }
 
     public function adminRoute(User $user): bool
