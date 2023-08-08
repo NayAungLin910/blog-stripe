@@ -5,11 +5,41 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <h2>This is the billing file</h2>
-            </div>
+    <section class="px-6">
+        <div class="overflow-hidden border-b border-gray-200">
+            <table class="min-w-full">
+                <thead class="bg-gray-500">
+                    <tr>
+                        <x-table.head>
+                            Date
+                        </x-table.head>
+                        <x-table.head>
+                            Total
+                        </x-table.head>
+                        <x-table.head>
+                            Action
+                        </x-table.head>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200 divide-solid">
+                    @foreach ($invoices as $invoice)
+                    <tr>
+                        <x-table.data>
+                            {{ $invoice->date()->toFormattedDateString() }}
+                        </x-table.data>
+                        <x-table.data>
+                            {{ $invoice->total() }}
+                        </x-table.data>
+                        <x-table.data>
+                            <a target="_blank"
+                                href="{{ route('download', ['invoice' => $invoice->id, 'price' => $invoices[0]->lines->data[0]->plan->id]) }}">
+                                Download
+                            </a>
+                        </x-table.data>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-    </div>
+    </section>
 </x-app-layout>

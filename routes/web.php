@@ -44,6 +44,7 @@ Route::prefix('subscriptions')->as('subscriptions.')->group(function () {
 
 Route::prefix('/dashboard')->group(function () {
     Route::get('/billing', [BillingController::class, 'index'])->name('billing');
+    Route::get('/billing/invoice/{invoice}/{price}', [BillingController::class, 'download'])->name('download');
 });
 
 /* Name: Authors
